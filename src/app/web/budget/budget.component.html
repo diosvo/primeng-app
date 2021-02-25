@@ -1,4 +1,4 @@
-<div class="p-grid">
+<section class="p-grid">
     <!-- Heading Title -->
     <div class="heading p-col-12">
         <h3 class="title p-text-uppercase p-text-center text-white">Budget Calculator</h3>
@@ -6,32 +6,15 @@
 
     <!-- Total Money -->
     <div class="total-container p-col-12">
-        <div class="total-money p-text-center red p-py-6">{{money | currency:'USD' : 'symbol-narrow':'.0'}}
+        <div class="total-money p-text-center green p-py-6">{{money | currency:'USD' : 'symbol-narrow':'.0'}}
         </div>
     </div>
-</div>
+</section>
 
-<!-- Add to list -->
-<div class="p-grid p-mt-0 hr">
-    <div class="p-sm-11 p-md-10 p-lg-5 p-mx-auto p-pt-4 p-pb-3">
-        <div class="p-grid">
-            <div class="p-col-3">
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon">$</span>
-                    <input type="number" pInputText placeholder="Amount">
-                </div>
-            </div>
-            <div class="p-col-7">
-                <input type="string" class="w-100" pInputText placeholder="Description">
-            </div>
-            <div class="p-col-2">
-                <span class="p-buttonset">
-                    <button class="w-100" pButton type="button" label="Add" icon="pi pi-check"></button>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Add item to list -->
+<section>
+    <app-item></app-item>
+</section>
 
 <!-- Details -->
 <div class="p-grid">
