@@ -6,7 +6,10 @@
                     <h3 class="p-text-uppercase text-caribbean">Incomes</h3>
                 </label>
 
-                <app-item-card></app-item-card>
+                <div class="budget-items">
+                    <app-item-card [isIncome]="true"></app-item-card>
+                    <app-item-card [isIncome]="true"></app-item-card>
+                </div>
             </div>
 
             <div class="p-lg-6 p-md-12 p-sm-12">
@@ -14,7 +17,10 @@
                     <h3 class="p-text-uppercase text-mandy">Expenes</h3>
                 </label>
 
-                <app-item-card></app-item-card>
+                <div class="budget-items">
+                    <app-item-card [isIncome]="false"></app-item-card>
+                    <app-item-card [isIncome]="false"></app-item-card>
+                </div>
             </div>
         </div>
     </div>

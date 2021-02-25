@@ -1,4 +1,4 @@
-<div class="container p-d-flex p-jc-between p-p-2">
+<div class="container p-d-flex p-jc-between p-p-2 p-mb-3" [ngClass]="{'income': isIncome, 'expense': !isIncome}">
     <div class="description">
         Salary
     </div>
@@ -6,4 +6,6 @@
     <div class="amount p-px-1">
         1000
     </div>
+
+    <div class="btn-delete p-d-flex p-ai-center p-jc-center">x</div>
 </div>
