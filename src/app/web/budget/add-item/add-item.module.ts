@@ -5,14 +5,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 
-import { ItemRoutingModule } from './item-routing.module';
-import { ItemComponent } from './item.component';
+import { AddItemRoutingModule } from './add-item-routing.module';
+import { AddItemComponent } from './add-item.component';
 
 @NgModule({
-  declarations: [ItemComponent],
+  declarations: [AddItemComponent],
   imports: [
     CommonModule,
-    ItemRoutingModule,
+    AddItemRoutingModule,
 
     FormsModule,
     ReactiveFormsModule,
@@ -20,7 +20,7 @@ import { ItemComponent } from './item.component';
     InputTextModule,
     ButtonModule,
   ],
-  exports: [ItemComponent]
+  exports: [AddItemComponent]
 })
 
-export class ItemModule { }
+export class AddItemModule { }
