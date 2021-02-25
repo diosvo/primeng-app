@@ -1,0 +1,61 @@
+$mirage : #161C2A;
+$pippin       : #FFDDE1;
+$athens-gray: #E9ECEF;
+$mercury : #E5E5E5;
+
+.container {
+        position: relative;
+
+        border-radius: 6px;
+        background-color: $athens-gray;
+
+        transition: all .2s ease-in;
+
+        &:hover {
+            background-color: $mercury;
+
+            cursor: pointer;
+            transition: all .2s ease-in-out;
+        }
+        
+    &:hover::after {
+        content: 'x';
+        position: absolute;
+        top: -1rem;
+        right: -0.75rem;
+        
+        width: 1.5rem;
+        height: 1.5rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: var(--color-white);
+        border-radius: 50%;
+        background-color: $mirage;
+
+        }
+    }
+
+.income {   
+    .description {
+        color: var(--color-caribbean);
+    }
+
+    .amount {
+        color: var(--color-caribbean);
+        background-color: var(--color-turquoise);
+    }
+}
+
+.expense {
+    .description {
+        color: var(--color-mandy);
+    }
+
+    .amount {
+        color: var(--color-mandy);
+        background-color: $pippin;
+    }
+}

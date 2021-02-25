@@ -5,6 +5,7 @@ import { BudgetRoutingModule } from './budget-routing.module';
 import { BudgetComponent } from './budget.component';
 
 import { AddItemModule } from './add-item/add-item.module';
+import { ListItemModule } from './list-item/list-item.module';
 
 @NgModule({
   declarations: [BudgetComponent],
@@ -12,7 +13,8 @@ import { AddItemModule } from './add-item/add-item.module';
     CommonModule,
     BudgetRoutingModule,
 
-    AddItemModule
+    AddItemModule,
+    ListItemModule
   ]
 })
 

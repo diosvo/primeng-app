@@ -1,10 +1,6 @@
 $indigo : #4E54C8;
 $malibu : #8F94FB;
 $mirage : #161C2A;
-$caribbean :#11998E;
-$pippin       : #FFDDE1;
-$athens-gray: #E9ECEF;
-$mercury : #E5E5E5;
 
 .heading {
     background: linear-gradient(to right top, $indigo, $malibu);
@@ -29,50 +25,6 @@ $mercury : #E5E5E5;
         &.green {
             color: var(--color-turquoise);
         }
-    }
-}
-
-.detail {
-    &-container {
-        position: relative;
-
-        border-radius: 6px;
-        background-color: $athens-gray;
-
-        transition: all .2s ease-in;
-
-        &:hover {
-            background-color: $mercury;
-            transition: all .2s ease-in-out;
-        }
-        
-    &:hover::after {
-        content: 'x';
-        position: absolute;
-        top: -1rem;
-        right: -0.75rem;
-        
-        width: 1.5rem;
-        height: 1.5rem;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        color: var(--color-white);
-        border-radius: 50%;
-        background-color: $mirage;
-
-        cursor: pointer;
-        }
-    }
-
-    &-income-amount {   
-        background-color: var(--color-turquoise);
-    }
-
-    &-expense-amount {
-        background-color: $pippin;
     }
 }
 
