@@ -1,0 +1,63 @@
+$indigo : #4E54C8;
+$malibu : #8F94FB;
+$mirage : #161C2A;
+$caribbean :#11998e;
+$turquoise       : #34E89E;
+$pippin       : #ffdde1;
+
+.heading {
+    background: linear-gradient(to right top, $indigo, $malibu);
+
+    .title {
+        letter-spacing: 1px;
+    }
+}
+
+.total {
+    &-container {
+        background-color: $mirage;
+    }
+
+    &-money {
+        font-size: 3rem;
+    }
+}
+
+.detail {
+    &-container {
+        position: relative;
+        background-color: #E9ECEF;
+        border-radius: 6px;
+
+        transition: 1s ease-in-out;
+        
+    &:hover::after {
+        content: 'x';
+        position: absolute;
+        top: -1rem;
+        right: -0.75rem;
+        
+        width: 1.5rem;
+        height: 1.5rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: white;
+        border-radius: 50%;
+        background-color: $mirage;
+
+        cursor: pointer;
+        }
+    }
+
+    &-income-amount {   
+        background-color: $turquoise;
+        color: $caribbean;
+    }
+
+    &-expense-amount {
+        background-color: $pippin;
+    }
+}

@@ -1,16 +1,71 @@
 <div class="p-grid">
-    <div class="p-col-6">
-        <div class="box">Nhung nè hihi</div>
+    <!-- Heading Title -->
+    <div class="heading p-col-12">
+        <h3 class="title p-text-uppercase p-text-center text-white">Budget Calculator</h3>
     </div>
-    <div class="p-col-6">
-        <div class="box">1</div>
-    </div>
-    <div class="p-col-6">
-        <div class="box">1</div>
-    </div>
-    <div class="p-col-6">
-        <div class="box">1</div>
+
+    <!-- Total Money -->
+    <div class="total-container p-col-12">
+        <div class="total-money p-text-center text-turquoise p-py-6">{{money | currency:'USD' : 'symbol-narrow':'.0'}}
+        </div>
     </div>
 </div>
 
-<p-calendar></p-calendar>
+<!-- Add to list -->
+<div class="p-grid p-mt-0 hr">
+    <div class="p-col-5 p-mx-auto p-pt-4 p-pb-3">
+        <div class="p-grid">
+            <div class="p-col-3">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">$</span>
+                    <input type="number" pInputText placeholder="Amount">
+                </div>
+            </div>
+            <div class="p-col-7">
+                <input type="string" class="w-100" pInputText placeholder="Description">
+            </div>
+            <div class="p-col-2">
+                <span class="p-buttonset">
+                    <button class="w-100" pButton type="button" label="Add" icon="pi pi-check"></button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Details -->
+<div class="p-grid">
+    <div class="p-col-5 p-mx-auto p-py-6">
+        <div class="p-grid">
+            <div class="p-col-6">
+                <label for="incom">
+                    <h3 class="p-text-uppercase text-caribbean">Incomes</h3>
+                </label>
+
+                <div class="detail-container p-d-flex p-jc-between p-p-2">
+                    <div class="detail-description text-caribbean">
+                        Salary
+                    </div>
+                    <div class="detail-income-amount text-turquoise p-px-1">
+                        1000
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-col-6">
+                <label for="incom">
+                    <h3 class="p-text-uppercase text-mandy">Expenes</h3>
+                </label>
+
+                <div class="detail-container p-d-flex p-jc-between p-p-2">
+                    <div class="detail-description text-mandy">
+                        Rent house
+                    </div>
+                    <div class="detail-expense-amount text-mandy p-px-1">
+                        1000
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

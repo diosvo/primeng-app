@@ -4,15 +4,19 @@ import { CommonModule } from '@angular/common';
 import { BudgetRoutingModule } from './budget-routing.module';
 import { BudgetComponent } from './budget.component';
 
-import { CalendarModule } from 'primeng/calendar';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [BudgetComponent],
   imports: [
     CommonModule,
     BudgetRoutingModule,
+    FormsModule,
 
-    CalendarModule
+    InputTextModule,
+    ButtonModule
   ]
 })
 export class BudgetModule { }

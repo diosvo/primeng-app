@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BudgetComponent implements OnInit {
 
+  money: number = 500000
+
   constructor() { }
 
   ngOnInit(): void {
