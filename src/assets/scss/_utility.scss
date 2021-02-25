@@ -1,0 +1,52 @@
+@import 'color';
+
+%inputBorderColor {
+    border-color: var(--color-silver) !important;
+}
+
+%noneBorder {
+    box-shadow:  none  !important;
+    outline: none  !important;
+}
+
+p {
+    margin: 0;
+}
+
+ul {
+    li {
+        list-style-type: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}
+
+
+input {
+    padding: 0.25rem 0.5rem;
+
+    &:hover {
+        @extend %inputBorderColor;
+    }
+
+    &:focus {
+        @extend %inputBorderColor;
+        @extend %noneBorder;
+    }
+}
+
+.p-button {
+    &:focus {
+        @extend %noneBorder;
+    }
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.hr {
+    border-bottom: 1px solid var(--hr);
+}

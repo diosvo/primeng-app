@@ -1,9 +1,8 @@
+@use './assets/scss/main.scss';
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
-:root {
-    --color-body : #F0F2F5;
-    --color-purple      : #4e54c8;
-    --color-turquoise   : #8f94fb;
+html {
+    box-sizing: border-box;
 }
 
 body {
@@ -11,19 +10,4 @@ body {
 
     font-family     : 'Nunito', sans-serif;
     background-color: var(--color-body);
-}
-
-
-p {
-    margin: 0;
-}
-
-ul {
-    li {
-        list-style-type: none;
-    }
-
-    a {
-        text-decoration: none;
-    }
 }

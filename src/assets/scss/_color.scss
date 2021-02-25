@@ -1,0 +1,29 @@
+:root {
+    --color-body : #F0F2F5;
+    --color-silver: #CCCCCC;
+    --hr  : #DADDE1;
+}
+
+$white: #FFFFFF;
+$turquoise       : #34E89E;
+$mandy: #E14A4A;
+$caribbean :#11998e;
+
+
+.text {
+    &-white {
+        color: $white;
+    }
+
+    &-turquoise {
+        color:  $turquoise;
+    }
+
+    &-mandy {
+        color:  $mandy;
+    }
+
+    &-caribbean {
+        color:  $caribbean;
+    }
+}
