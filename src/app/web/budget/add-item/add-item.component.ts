@@ -12,7 +12,7 @@ export class AddItemComponent implements OnInit {
   itemForm!: FormGroup
 
   @Input() item: BudgetItemModel = new BudgetItemModel(+'', '')
-  @Output() formSubmit: EventEmitter<BudgetItemModel> =  new EventEmitter<BudgetItemModel>()
+  @Output() formSubmit: EventEmitter<BudgetItemModel> = new EventEmitter<BudgetItemModel>()
 
   constructor(private _fb: FormBuilder) { }
 
@@ -22,9 +22,9 @@ export class AddItemComponent implements OnInit {
       description: ['', Validators.required]
     })
 
-    this.itemForm.patchValue({
-      ...this.item
-    })
+    /* this.itemForm.valueChanges.subscribe(res => {
+      console.log('Component...', res);
+    }) */
   }
 
   onSubmit() {
