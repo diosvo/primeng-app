@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
 
 @Component({
   selector: 'app-item-card',
@@ -7,11 +8,19 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ItemCardComponent implements OnInit {
 
-  @Input() isIncome?: boolean = true;
+  @Input() item : BudgetItemModel;
+  // should BudgetItemModel -> error: Object is possibly 'undefined' ???
+
+  @Output() xButton: EventEmitter<BudgetItemModel> = new EventEmitter<BudgetItemModel>()
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.item);
+  }
+
+  onX() {
+    this.xButton.emit()
   }
 
 }

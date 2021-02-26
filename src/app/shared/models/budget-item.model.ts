@@ -1,4 +1,3 @@
 export class BudgetItemModel {
-    amount?: number;
-    description?: string;
+    constructor(public amount: number, public description: string) { }
 }

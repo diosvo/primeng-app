@@ -18,5 +18,5 @@
 
 <!-- Detail list -->
 <section>
-    <app-list-item [budgetItems]="budgetItems"></app-list-item>
+    <app-list-item [budgetItems]="budgetItems" (deleteItem)="deleteItem($event)"></app-list-item>
 </section>

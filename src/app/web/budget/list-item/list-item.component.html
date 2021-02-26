@@ -6,9 +6,8 @@
                     <h3 class="p-text-uppercase text-caribbean">Incomes</h3>
                 </label>
 
-                <div class="budget-items">
-                    <app-item-card [isIncome]="true"></app-item-card>
-                    <app-item-card [isIncome]="true"></app-item-card>
+                <div class="budget-items" *ngFor="let item of budgetItems">
+                    <app-item-card *ngIf="item.amount>= 0" [item]="item" (xButton)="onDelete(item)"></app-item-card>
                 </div>
             </div>
 
@@ -17,9 +16,8 @@
                     <h3 class="p-text-uppercase text-mandy">Expenes</h3>
                 </label>
 
-                <div class="budget-items">
-                    <app-item-card [isIncome]="false"></app-item-card>
-                    <app-item-card [isIncome]="false"></app-item-card>
+                <div class="budget-items" *ngFor="let item of budgetItems">
+                    <app-item-card *ngIf="item.amount < 0" [item]="item"></app-item-card>
                 </div>
             </div>
         </div>
