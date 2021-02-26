@@ -15,7 +15,9 @@ export class ItemCardComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.item);
+  }
 
   onX() {
     this.xButton.emit()

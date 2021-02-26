@@ -13,25 +13,15 @@ export class BudgetComponent implements OnInit {
 
   constructor() { }
 
-  async ngOnInit() {
-    this.budgetItems = this.items
+  ngOnInit(): void {
   }
 
-  async addItem(item: BudgetItemModel) {
+  addItem(item: BudgetItemModel) {
     this.budgetItems.push(item);
-    console.log(this.budgetItems);
-
-    await localStorage.setItem('BudgetItems', JSON.stringify(this.budgetItems));
   }
 
-  async deleteItem(item: BudgetItemModel) {
+  deleteItem(item: BudgetItemModel) {
     let index = this.budgetItems.indexOf(item)
     this.budgetItems.splice(index, 1); // .splice(start, deleteCount)
-
-    await localStorage.setItem('BudgetItems', JSON.stringify(this.budgetItems));
-  }
-
-  get items() {
-    return JSON.parse(localStorage.getItem("BudgetItems") || '{}') as any
   }
 }
