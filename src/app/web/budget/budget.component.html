@@ -6,17 +6,17 @@
 
     <!-- Total Money -->
     <div class="total-container p-col-12">
-        <div class="total-money p-text-center green p-py-6">{{money | currency:'USD' : 'symbol-narrow':'.0'}}
+        <div class="total-money p-text-center green p-py-6">{{money | currency:'USD' : 'symbol-narrow': '.0'}}
         </div>
     </div>
 </section>
 
 <!-- Add item to list -->
 <section>
-    <app-add-item></app-add-item>
+    <app-add-item (formSubmit)="addItem($event)"></app-add-item>
 </section>
 
 <!-- Detail list -->
 <section>
-    <app-list-item></app-list-item>
+    <app-list-item [budgetItems]="budgetItems"></app-list-item>
 </section>
