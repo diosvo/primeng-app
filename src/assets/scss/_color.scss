@@ -1,33 +1,29 @@
 :root {
-    --color-body : #F0F2F5;
+    --color-body  : #F0F2F5;
     --color-silver: #CCCCCC;
-    --color-white: #FFFFFF;
+    --color-white : #FFFFFF;
 
     --color-turquoise: #34E89E;
     --color-caribbean: #11998E;
-    --color-mandy: #E14A4A;
+    --color-mandy    : #E14A4A;
 
-    --hr  : #DADDE1;
+    --hr: #DADDE1;
 }
-
-$white: #FFFFFF;
-$turquoise       : #34E89E;
-$mandy: #E14A4A;
 
 .text {
     &-white {
-        color:  var(--color-white);
+        color: var(--color-white);
     }
 
     &-turquoise {
-        color:  var(--color-turquoise);
+        color: var(--color-turquoise);
     }
 
     &-mandy {
-        color:  var(--color-mandy);
+        color: var(--color-mandy);
     }
 
     &-caribbean {
-        color:  var(--color-caribbean);
+        color: var(--color-caribbean);
     }
 }

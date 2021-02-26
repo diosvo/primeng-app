@@ -8,7 +8,6 @@ import { ListItemRoutingModule } from './list-item-routing.module';
 import { ListItemComponent } from './list-item.component';
 import { ItemCardComponent } from './item-card/item-card.component';
 
-
 @NgModule({
   declarations: [ListItemComponent, ItemCardComponent],
   imports: [

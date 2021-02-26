@@ -1,58 +1,58 @@
-$mirage : #161C2A;
-$pippin       : #FFDDE1;
+$mirage     : #161C2A;
+$pippin     : #FFDDE1;
 $athens-gray: #E9ECEF;
-$mercury : #F5F5F5;
+$mercury    : #F5F5F5;
 
 .container {
-        position: relative;
+    position: relative;
 
-        border-radius: 6px;
-        background-color: $athens-gray;
+    border-radius   : 6px;
+    background-color: $athens-gray;
 
-        transition: background-color 0.2s ease-out;
+    transition: background-color 0.2s ease-out;
 
-        &:hover {
+    &:hover {
 
-            background-color: $mercury;
-            box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
+        background-color: $mercury;
+        box-shadow      : 0 0 1px 2px rgba(0, 0, 0, 0.2);
+        cursor          : pointer;
 
-            .btn-delete {
-                transform: scale(1);
-                opacity: 1;
-            }
+        .btn-delete {
+            transform: scale(1);
+            opacity  : 1;
         }
-        
+    }
+
     .btn-delete {
         position: absolute;
-        top: -1rem;
-        right: -0.75rem;
-        
-        width: 1.5rem;
+        top     : -1rem;
+        right   : -0.75rem;
+
+        width : 1.5rem;
         height: 1.5rem;
 
-        color: var(--color-white);
-        border-radius: 50%;
+        color           : var(--color-white);
+        border-radius   : 50%;
         background-color: $mirage;
 
-        opacity: 0;
-        transform: scale(0);
+        opacity   : 0;
+        transform : scale(0);
         transition: opacity 0.2s ease-in, transform 0.2s ease-in;
 
         &:hover {
-            transform: scale(1.1);
+            transform : scale(1.1);
             transition: all 0.2s ease-in;
         }
     }
 }
 
-.income {   
+.income {
     .description {
         color: var(--color-caribbean);
     }
 
     .amount {
-        color: var(--color-caribbean);
+        color           : var(--color-caribbean);
         background-color: var(--color-turquoise);
     }
 }
@@ -63,7 +63,7 @@ $mercury : #F5F5F5;
     }
 
     .amount {
-        color: var(--color-mandy);
+        color           : var(--color-mandy);
         background-color: $pippin;
     }
 }

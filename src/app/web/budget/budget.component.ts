@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
-import { EditItemComponent } from './edit-item/edit-item.component';
 
 @Component({
   selector: 'app-budget',
@@ -10,7 +9,6 @@ import { EditItemComponent } from './edit-item/edit-item.component';
   providers: [DialogService]
 })
 export class BudgetComponent implements OnInit {
-
   money: number = 500000
 
   budgetItems: BudgetItemModel[] = new Array<BudgetItemModel>();
@@ -34,7 +32,7 @@ export class BudgetComponent implements OnInit {
   }
 
   get items() {
-    return JSON.parse(localStorage.getItem("BudgetItems") || '{}') as any
+    return JSON.parse(localStorage.getItem("BudgetItems") || '[]') as any
   }
 
   

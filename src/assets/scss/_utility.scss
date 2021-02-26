@@ -1,12 +1,10 @@
-@import 'color';
-
 %inputBorderColor {
     border-color: var(--color-silver) !important;
 }
 
 %noneBorder {
-    box-shadow:  none  !important;
-    outline: none  !important;
+    box-shadow: none !important;
+    outline   : none !important;
 }
 
 p {

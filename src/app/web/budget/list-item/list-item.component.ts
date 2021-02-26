@@ -8,6 +8,7 @@ import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
 
 export class ListItemComponent implements OnInit {
 
+  
   @Input() budgetItems: BudgetItemModel[]
 
   // should: BudgetItemModel[] -> error: Object is possibly 'undefined'
@@ -16,7 +17,8 @@ export class ListItemComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {}
+  async ngOnInit() {
+  }
 
   onDelete(item: BudgetItemModel) {
     this.deleteItem.emit(item)

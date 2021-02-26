@@ -1,9 +1,18 @@
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+$indigo : #4E54C8;
+$malibu : #8F94FB;
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin            : 0;
 }
 
 .isInvalid {
   cursor: not-allowed;
+}
+
+.p-button {
+  border-radius   : 4px !important;
+  background-color: $indigo !important;
+  border          : 1px solid $malibu !important;
 }
