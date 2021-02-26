@@ -19,6 +19,6 @@ export class ListItemComponent implements OnInit {
   ngOnInit(): void {}
 
   onDelete(item: BudgetItemModel) {
-    this.deleteItem.emit()
+    this.deleteItem.emit(item)
   }
 }

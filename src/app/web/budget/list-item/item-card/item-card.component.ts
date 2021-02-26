@@ -19,7 +19,7 @@ export class ItemCardComponent implements OnInit {
     console.log(this.item);
   }
 
-  onX() {
+  onX(item = this.item) {
     this.xButton.emit()
   }
 
