@@ -11,7 +11,7 @@ import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
 export class AddItemComponent implements OnInit {
   itemForm!: FormGroup
 
-  @Input() item: BudgetItemModel = new BudgetItemModel(+ '', '')
+  @Input() item: BudgetItemModel = new BudgetItemModel()
   @Output() formSubmit: EventEmitter<BudgetItemModel> =  new EventEmitter<BudgetItemModel>()
 
   constructor(private _fb: FormBuilder) { }
@@ -28,6 +28,7 @@ export class AddItemComponent implements OnInit {
   }
 
   onSubmit() {
-    this.formSubmit.emit(this.itemForm.value)
+    this.formSubmit.emit(this.itemForm.value);
+    this.itemForm.reset();
   }
 }
