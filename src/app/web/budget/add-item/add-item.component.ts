@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
 
 @Component({
   selector: 'app-add-item',
@@ -6,10 +9,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-item.component.scss']
 })
 export class AddItemComponent implements OnInit {
+  itemForm!: FormGroup
 
-  constructor() { }
+  @Input() item: BudgetItemModel = new BudgetItemModel(0, '')
+  @Output() formSubmit: EventEmitter<BudgetItemModel> =  new EventEmitter<BudgetItemModel>()
+
+  constructor(private _fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.itemForm = this._fb.group({
+      amount: ['', Validators.required],
+      description: ['', Validators.required]
+    })
+
+    this.itemForm.patchValue({
+      ...this.item
+    })
   }
 
+  onSubmit() {
+    this.formSubmit.emit(this.itemForm.value)
+  }
 }
