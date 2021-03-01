@@ -10,29 +10,41 @@ import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
   providers: [DialogService, DecimalPipe]
 })
 export class BudgetComponent implements OnInit {
-  money: number = 500000
-
+  budgetTotal: number = 0;
   budgetItems: BudgetItemModel[] = new Array<BudgetItemModel>();
 
   constructor() { }
 
   async ngOnInit() {
-    this.budgetItems = this.items
+    /* [this.budgetItems, this.budgetTotal] = this.items */
   }
 
   async addItem(item: BudgetItemModel) {
     this.budgetItems.push(item);
-    await localStorage.setItem('BudgetItems', JSON.stringify(this.budgetItems));
+
+    this.budgetTotal += item.amount;
+    /* await [
+      localStorage.setItem('Budget Items', JSON.stringify(this.budgetItems)),
+      localStorage.setItem('Total', JSON.stringify(this.budgetTotal))
+    ] */
   }
 
   async deleteItem(item: BudgetItemModel) {
     let index = this.budgetItems.indexOf(item);
     this.budgetItems.splice(index, 1); // .splice(start, deleteCount)
 
-    await localStorage.setItem('BudgetItems', JSON.stringify(this.budgetItems));
+    this.budgetTotal -= item.amount;
+    /* await [
+      localStorage.setItem('Budget Items', JSON.stringify(this.budgetItems)),
+      localStorage.setItem('Total', JSON.stringify(this.budgetTotal))
+    ] */
   }
 
-  get items() {
-    return JSON.parse(localStorage.getItem("BudgetItems") || '[]')
-  }
+  /* get items() {
+    let itemDetail = [
+      JSON.parse(localStorage.getItem("Budget Items") || '[]'),
+      JSON.parse(localStorage.getItem("Total") || '')
+    ]
+    return itemDetail;
+  } */
 }
