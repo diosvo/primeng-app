@@ -21,6 +21,10 @@ export class AddItemComponent implements OnInit {
       amount: ['', Validators.required],
       description: ['', Validators.required]
     })
+
+    this.itemForm.patchValue({
+      ...this.item
+    })
   }
 
   onSubmit() {

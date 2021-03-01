@@ -1,5 +1,5 @@
 <div class="container p-d-flex p-jc-between p-p-2 p-mb-3"
-    [ngClass]="{'income': item.amount >= 0 , 'expense': item.amount < 0 }" (click)="onEdit()">
+    [ngClass]="{'income': item.amount >= 0 , 'expense': item.amount < 0 }" (click)="onCardClick()">
     <div class="description">
         {{item.description}}
     </div>

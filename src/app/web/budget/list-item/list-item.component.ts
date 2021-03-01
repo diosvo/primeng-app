@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+
 import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
+import { EditItemComponent } from '../edit-item/edit-item.component';
 
 @Component({
   selector: 'app-list-item',
@@ -8,19 +11,42 @@ import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
 
 export class ListItemComponent implements OnInit {
 
-  
+  ref: DynamicDialogRef;
+
   @Input() budgetItems: BudgetItemModel[]
 
   // should: BudgetItemModel[] -> error: Object is possibly 'undefined'
 
-  @Output() deleteItem: EventEmitter<BudgetItemModel> =  new EventEmitter<BudgetItemModel>()
+  @Output() deleteItem: EventEmitter<BudgetItemModel> = new EventEmitter<BudgetItemModel>()
 
-  constructor() { }
+  constructor(public dialogService: DialogService) { }
 
   async ngOnInit() {
   }
 
   onDelete(item: BudgetItemModel) {
     this.deleteItem.emit(item)
+  }
+
+  onEdit(item: BudgetItemModel) {
+    const ref = this.dialogService.open(EditItemComponent, {
+      width: '700px',
+      header: 'Edit Item',
+      data: item,
+      dismissableMask: true
+    });
+
+    ref.onClose.subscribe((result: BudgetItemModel) => {
+      if (result) {
+        // Update item
+        this.budgetItems[this.budgetItems.indexOf(item)] = result;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.ref) {
+      this.ref.close();
+    }
   }
 }

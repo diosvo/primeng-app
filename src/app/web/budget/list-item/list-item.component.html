@@ -1,5 +1,5 @@
-<div class="p-grid hr">
-    <div class="p-col-12 p-sm-11 p-md-10 p-lg-7 p-mx-auto p-py-6">
+<div class="p-d-flex p-ai-center p-jc-center hr">
+    <div class="width-700 p-col-12 p-sm-12 p-md-11  p-mx-md-auto p-mx-lg-auto p-py-6">
         <div class="p-grid">
             <div class="p-col-12 p-sm-12 p-md-12 p-lg-6">
                 <label for="income">
@@ -7,7 +7,8 @@
                 </label>
 
                 <div class="budget-items" *ngFor="let item of budgetItems">
-                    <app-item-card *ngIf="item.amount>= 0" [item]="item" (xButton)="onDelete(item)"></app-item-card>
+                    <app-item-card *ngIf="item.amount>= 0" [item]="item" (cardClick)="onEdit(item)"
+                        (xButton)="onDelete(item)"></app-item-card>
                 </div>
             </div>
 
@@ -17,7 +18,8 @@
                 </label>
 
                 <div class="budget-items" *ngFor="let item of budgetItems">
-                    <app-item-card *ngIf="item.amount < 0" [item]="item" (xButton)="onDelete(item)"></app-item-card>
+                    <app-item-card *ngIf="item.amount < 0" [item]="item" (cardClick)="onEdit(item)"
+                        (xButton)="onDelete(item)"></app-item-card>
                 </div>
             </div>
         </div>

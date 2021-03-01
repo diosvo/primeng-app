@@ -10,32 +10,21 @@ import { EditItemComponent } from '../../edit-item/edit-item.component';
 })
 export class ItemCardComponent implements OnInit {
 
-  @Input() item : BudgetItemModel;
+  @Input() item: BudgetItemModel;
   // should BudgetItemModel -> error: Object is possibly 'undefined' ???
 
   @Output() xButton: EventEmitter<BudgetItemModel> = new EventEmitter<BudgetItemModel>()
+  @Output() cardClick: EventEmitter<any> = new EventEmitter<any>()
 
-  ref: DynamicDialogRef;
+  constructor() { }
 
-  constructor(public dialogService: DialogService) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void { }
-
-  onX(item = this.item) {
-    this.xButton.emit()
+  onX(item: BudgetItemModel) {
+    this.xButton.emit(item)
   }
 
-  onEdit() {
-    const ref = this.dialogService.open(EditItemComponent, {
-      width: '67.5%',
-      header: 'Edit Item',
-      dismissableMask: true
-    });
-  }
-
-  ngOnDestroy() {
-    if (this.ref) {
-      this.ref.close();
-    }
+  onCardClick() {
+    this.cardClick.emit()
   }
 }

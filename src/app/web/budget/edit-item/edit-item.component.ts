@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+
 import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
 
 @Component({
@@ -11,15 +12,14 @@ export class EditItemComponent implements OnInit {
 
   @Input() item: BudgetItemModel
 
-  displayModal: boolean = false
-
   constructor(public ref: DynamicDialogRef,
     public config: DynamicDialogConfig) { }
 
   ngOnInit(): void {
+    this.item = this.config.data
   }
 
   onSubmit(updateItem: BudgetItemModel) {
-    console.log(updateItem);
+    this.ref.close(updateItem);
   }
 }
