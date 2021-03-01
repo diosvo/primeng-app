@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
@@ -6,7 +7,7 @@ import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
   selector: 'app-budget',
   templateUrl: './budget.component.html',
   styleUrls: ['./budget.component.scss'],
-  providers: [DialogService]
+  providers: [DialogService, DecimalPipe]
 })
 export class BudgetComponent implements OnInit {
   money: number = 500000

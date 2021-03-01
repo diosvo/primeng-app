@@ -6,6 +6,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 
 import { AddItemRoutingModule } from './add-item-routing.module';
+import { SharedDirectivesModule } from 'src/app/shared/directives/shared-directives.module';
+
 import { AddItemComponent } from './add-item.component';
 
 @NgModule({
@@ -13,7 +15,8 @@ import { AddItemComponent } from './add-item.component';
   imports: [
     CommonModule,
     AddItemRoutingModule,
-
+    SharedDirectivesModule,
+    
     FormsModule,
     ReactiveFormsModule,
 
