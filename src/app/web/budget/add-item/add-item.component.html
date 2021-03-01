@@ -8,13 +8,14 @@
                 </div>
             </div>
             <div class="p-col-12 p-sm-12 p-md-6 p-lg-7">
-                <input type="string" formControlName="description" class="w-100" pInputText placeholder="Description" maxlength="50"
-                    required>
+                <input type="string" formControlName="description" class="w-100" pInputText placeholder="Description"
+                    maxlength="50" required>
             </div>
             <div class="p-col-12 p-sm-12 p-md-2 p-lg-2">
                 <span class="p-buttonset">
-                    <button type="submit" class="w-100" pButton label="Add" icon="pi pi-check"
-                        [disabled]="!itemForm.valid" [ngClass]="{'isInvalid': !itemForm.valid}"></button>
+                    <button type="submit" class="w-100" pButton label="{{!isNewItem ? 'Add' : 'Edit'}}"
+                        [disabled]="!itemForm.valid"
+                        [ngClass]="{'isInvalid': !isNewItem, 'isValid': isNewItem}"></button>
                 </span>
             </div>
         </div>

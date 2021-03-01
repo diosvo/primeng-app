@@ -11,6 +11,10 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: not-allowed;
 }
 
+.isValid {
+  cursor: pointer;
+}
+
 .p-button {
   border-radius   : 4px !important;
   background-color: $indigo !important;

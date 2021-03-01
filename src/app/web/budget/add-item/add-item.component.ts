@@ -10,8 +10,9 @@ import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
 })
 export class AddItemComponent implements OnInit {
   itemForm!: FormGroup
+  isNewItem: boolean;
 
-  @Input() item: BudgetItemModel = new BudgetItemModel(+'', '')
+  @Input() item: BudgetItemModel
   @Output() formSubmit: EventEmitter<BudgetItemModel> = new EventEmitter<BudgetItemModel>()
 
   constructor(private _fb: FormBuilder) { }
@@ -25,6 +26,15 @@ export class AddItemComponent implements OnInit {
     this.itemForm.patchValue({
       ...this.item
     })
+
+    // If item has value
+
+    if (this.item) {
+      this.isNewItem = true;
+    } else {
+      this.isNewItem = false;
+      this.item = new BudgetItemModel(+'', '')
+    }
   }
 
   onSubmit() {
