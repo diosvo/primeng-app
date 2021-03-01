@@ -18,6 +18,7 @@ export class ListItemComponent implements OnInit {
   // should: BudgetItemModel[] -> error: Object is possibly 'undefined'
 
   @Output() deleteItem: EventEmitter<BudgetItemModel> = new EventEmitter<BudgetItemModel>()
+  @Output() editItem: EventEmitter<UpdateEvent> = new EventEmitter<UpdateEvent>()
 
   constructor(public dialogService: DialogService) { }
 
@@ -38,8 +39,10 @@ export class ListItemComponent implements OnInit {
 
     ref.onClose.subscribe((result: BudgetItemModel) => {
       if (result) {
-        // Update item
-        this.budgetItems[this.budgetItems.indexOf(item)] = result;
+        this.editItem.emit({
+          old: item,
+          new: result
+        });
       }
     });
   }
@@ -49,4 +52,9 @@ export class ListItemComponent implements OnInit {
       this.ref.close();
     }
   }
+}
+
+export interface UpdateEvent {
+  old: BudgetItemModel,
+  new: BudgetItemModel
 }

@@ -1,6 +1,9 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+
 import { DialogService } from 'primeng/dynamicdialog';
+
+import { UpdateEvent } from './list-item/list-item.component';
 import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
 
 @Component({
@@ -10,22 +13,22 @@ import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
   providers: [DialogService, DecimalPipe]
 })
 export class BudgetComponent implements OnInit {
-  budgetTotal: number = 0;
+  totalBudget: number = 0;
   budgetItems: BudgetItemModel[] = new Array<BudgetItemModel>();
 
   constructor() { }
 
   async ngOnInit() {
-    /* [this.budgetItems, this.budgetTotal] = this.items */
+    /* [this.budgetItems, this.totalBudget] = this.items */
   }
 
   async addItem(item: BudgetItemModel) {
     this.budgetItems.push(item);
 
-    this.budgetTotal += item.amount;
+    this.totalBudget += item.amount;
     /* await [
       localStorage.setItem('Budget Items', JSON.stringify(this.budgetItems)),
-      localStorage.setItem('Total', JSON.stringify(this.budgetTotal))
+      localStorage.setItem('Total', JSON.stringify(this.totalBudget))
     ] */
   }
 
@@ -33,11 +36,20 @@ export class BudgetComponent implements OnInit {
     let index = this.budgetItems.indexOf(item);
     this.budgetItems.splice(index, 1); // .splice(start, deleteCount)
 
-    this.budgetTotal -= item.amount;
+    this.totalBudget -= item.amount;
     /* await [
       localStorage.setItem('Budget Items', JSON.stringify(this.budgetItems)),
-      localStorage.setItem('Total', JSON.stringify(this.budgetTotal))
+      localStorage.setItem('Total', JSON.stringify(this.totalBudget))
     ] */
+  }
+
+  async editItem(updateEvent: UpdateEvent) {
+    // Replace the item with updated/submitted item from the form
+    this.budgetItems[this.budgetItems.indexOf(updateEvent.old)] = updateEvent.new;
+
+    // Update the total budget
+    this.totalBudget -= updateEvent.old.amount
+    this.totalBudget += updateEvent.new.amount
   }
 
   /* get items() {

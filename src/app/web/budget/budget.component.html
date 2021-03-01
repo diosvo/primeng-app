@@ -6,7 +6,8 @@
 
     <!-- Total Money -->
     <div class="total-container p-col-12">
-        <div class="total-money p-text-center green p-py-6">{{money | currency:'USD' : 'symbol-narrow': '.0'}}
+        <div class="total-money p-text-center p-py-6" [ngClass]="{'red': totalBudget < 0, 'green': totalBudget >= 0}">
+            {{totalBudget | currency:'USD' : '': '.0'}}
         </div>
     </div>
 </section>
@@ -18,5 +19,6 @@
 
 <!-- Detail list -->
 <section>
-    <app-list-item [budgetItems]="budgetItems" (deleteItem)="deleteItem($event)"></app-list-item>
+    <app-list-item [budgetItems]="budgetItems" (deleteItem)="deleteItem($event)" (editItem)=editItem($event)>
+    </app-list-item>
 </section>
