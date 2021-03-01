@@ -15,7 +15,7 @@
                 <span class="p-buttonset">
                     <button type="submit" class="w-100" pButton label="{{!isNewItem ? 'Add' : 'Edit'}}"
                         [disabled]="!itemForm.valid"
-                        [ngClass]="{'isInvalid': !isNewItem, 'isValid': isNewItem}"></button>
+                        [ngClass]="{'isInvalid': !itemForm.valid, 'isValid': itemForm.valid}"></button>
                 </span>
             </div>
         </div>
