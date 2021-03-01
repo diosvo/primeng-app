@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
 
@@ -21,10 +21,6 @@ export class AddItemComponent implements OnInit {
       amount: ['', Validators.required],
       description: ['', Validators.required]
     })
-
-    /* this.itemForm.valueChanges.subscribe(res => {
-      console.log('Component...', res);
-    }) */
   }
 
   onSubmit() {

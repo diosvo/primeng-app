@@ -32,8 +32,6 @@ export class BudgetComponent implements OnInit {
   }
 
   get items() {
-    return JSON.parse(localStorage.getItem("BudgetItems") || '[]') as any
+    return JSON.parse(localStorage.getItem("BudgetItems") || '[]')
   }
-
-  
 }

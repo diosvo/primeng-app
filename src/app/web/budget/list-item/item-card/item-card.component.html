@@ -5,7 +5,7 @@
     </div>
 
     <div class="amount p-px-1">
-        {{item.amount}}
+        {{item.amount | currency:'USD' : '': '.0'}}
     </div>
 
     <div class="btn-delete p-d-flex p-ai-center p-jc-center" (click)="onX(item)">x</div>
