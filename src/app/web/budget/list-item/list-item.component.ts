@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { BudgetService } from 'src/app/core/services/budget.service';
 
 import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
 import { EditItemComponent } from '../edit-item/edit-item.component';
@@ -20,9 +21,12 @@ export class ListItemComponent implements OnInit {
   @Output() deleteItem: EventEmitter<BudgetItemModel> = new EventEmitter<BudgetItemModel>()
   @Output() editItem: EventEmitter<UpdateEvent> = new EventEmitter<UpdateEvent>()
 
-  constructor(public dialogService: DialogService) { }
+  constructor(private _budgetService: BudgetService, public dialogService: DialogService) { }
 
   async ngOnInit() {
+    this._budgetService.onGetAll().subscribe(result => {
+      this.budgetItems = result
+    })
   }
 
   onDelete(item: BudgetItemModel) {

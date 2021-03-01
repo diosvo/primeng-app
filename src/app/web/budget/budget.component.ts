@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 
-import { BudgetService } from 'src/app/core/services/budget.service';
-
 import { UpdateEvent } from './list-item/list-item.component';
 import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
 
@@ -18,13 +16,9 @@ export class BudgetComponent implements OnInit {
   totalBudget: number = 0;
   budgetItems: BudgetItemModel[] = new Array<BudgetItemModel>();
 
-  constructor(private _budgetService: BudgetService, private _messageService: MessageService) { }
+  constructor(private _messageService: MessageService) { }
 
-  async ngOnInit() {
-    this._budgetService.onGetAll().subscribe(res => {
-      console.log(res);
-    })
-  }
+  ngOnInit() { }
 
   async addItem(item: BudgetItemModel) {
     this.budgetItems.push(item);
