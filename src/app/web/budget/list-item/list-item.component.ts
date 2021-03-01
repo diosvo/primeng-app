@@ -13,6 +13,7 @@ import { EditItemComponent } from '../edit-item/edit-item.component';
 export class ListItemComponent implements OnInit {
 
   ref: DynamicDialogRef;
+  cols: any[];
 
   @Input() budgetItems: BudgetItemModel[]
 
@@ -24,9 +25,14 @@ export class ListItemComponent implements OnInit {
   constructor(private _budgetService: BudgetService, public dialogService: DialogService) { }
 
   async ngOnInit() {
-    this._budgetService.onGetAll().subscribe(result => {
-      this.budgetItems = result
-    })
+    /* this._budgetService.onGetAll().subscribe(result => {
+      this.budgetItems = result;
+    });
+
+    this.cols = [
+      { field: 'amount', header: 'Amount' },
+      { field: 'description', header: 'Description' }
+    ]; */
   }
 
   onDelete(item: BudgetItemModel) {

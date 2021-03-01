@@ -1,7 +1,7 @@
 <div class="p-d-flex p-ai-center p-jc-center hr">
     <div class="width-700 p-col-12 p-sm-12 p-md-11  p-mx-md-auto p-mx-lg-auto p-py-6">
         <div class="p-grid">
-<!--             <div class="p-col-12 p-sm-12 p-md-12 p-lg-6">
+            <div class="p-col-12 p-sm-12 p-md-12 p-lg-6">
                 <label for="income">
                     <h3 class="p-text-uppercase text-caribbean">Incomes</h3>
                 </label>
@@ -21,22 +21,7 @@
                     <app-item-card *ngIf="item.amount < 0" [item]="item" (cardClick)="onEdit(item)"
                         (xButton)="onDelete(item)"></app-item-card>
                 </div>
-            </div> -->
-
-            <p-table [value]="budgetItems">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>Vin</th>
-                        <th>Year</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-car>
-                    <tr>
-                        <td>{{car.amount}}</td>
-                        <td>{{car.description}}</td>
-                    </tr>
-                </ng-template>
-            </p-table>
+            </div>
         </div>
     </div>
 </div>
