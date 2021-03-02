@@ -8,6 +8,7 @@ import { WebRoutingModule } from './web-routing.module';
   imports: [
     CommonModule,
     WebRoutingModule
-  ]
+  ],
+  exports: [],
 })
 export class WebModule { }
