@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 
 import { TableDataRoutingModule } from './table-data-routing.module';
@@ -19,6 +20,7 @@ import { ShadowTestComponent } from '../shadow-test/shadow-test.component';
 
     TableModule,
     DropdownModule,
+    ButtonModule,
     TableDataRoutingModule
   ]
 })
