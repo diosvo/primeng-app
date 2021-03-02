@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TableModule } from 'primeng/table';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 import { EditItemModule } from '../edit-item/edit-item.module';
@@ -16,8 +15,6 @@ import { EditItemComponent } from '../edit-item/edit-item.component';
   imports: [
     CommonModule,
     DynamicDialogModule,
-
-    TableModule,
 
     ListItemRoutingModule,
     EditItemModule,

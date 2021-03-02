@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { BudgetService } from 'src/app/core/services/budget.service';
 
 import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
 import { EditItemComponent } from '../edit-item/edit-item.component';
@@ -13,7 +12,6 @@ import { EditItemComponent } from '../edit-item/edit-item.component';
 export class ListItemComponent implements OnInit {
 
   ref: DynamicDialogRef;
-  cols: any[];
 
   @Input() budgetItems: BudgetItemModel[]
 
@@ -22,18 +20,9 @@ export class ListItemComponent implements OnInit {
   @Output() deleteItem: EventEmitter<BudgetItemModel> = new EventEmitter<BudgetItemModel>()
   @Output() editItem: EventEmitter<UpdateEvent> = new EventEmitter<UpdateEvent>()
 
-  constructor(private _budgetService: BudgetService, public dialogService: DialogService) { }
+  constructor(public dialogService: DialogService) { }
 
-  async ngOnInit() {
-    /* this._budgetService.onGetAll().subscribe(result => {
-      this.budgetItems = result;
-    });
-
-    this.cols = [
-      { field: 'amount', header: 'Amount' },
-      { field: 'description', header: 'Description' }
-    ]; */
-  }
+  async ngOnInit() {}
 
   onDelete(item: BudgetItemModel) {
     this.deleteItem.emit(item)

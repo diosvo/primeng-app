@@ -6,6 +6,10 @@ const routes: Routes = [
     path: 'budget-calculator',
     loadChildren: () => import('./budget/budget.module').then(m => m.BudgetModule),
   },
+  {
+    path: 'table',
+    loadChildren: () => import('./table-data/table-data.module').then(m => m.TableDataModule),
+  },
 ];
 
 @NgModule({
