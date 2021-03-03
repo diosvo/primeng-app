@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 import { TableDataRoutingModule } from './table-data-routing.module';
 import { TableDataComponent } from './table-data.component';
@@ -21,6 +22,8 @@ import { ShadowTestComponent } from '../shadow-test/shadow-test.component';
     TableModule,
     DropdownModule,
     ButtonModule,
+    ProgressBarModule,
+
     TableDataRoutingModule
   ]
 })

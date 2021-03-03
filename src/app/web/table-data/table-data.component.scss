@@ -1,0 +1,16 @@
+::ng-deep {
+
+    .p-datatable-wrapper {
+        font-size: 15px;
+    }
+
+    .p-progressbar {
+        height       : 0.5rem;
+        border-radius: 1.5rem;
+
+        .p-progressbar-value {
+            border-radius: 1.5rem;
+            background   : #607D8B;
+        }
+    }
+}

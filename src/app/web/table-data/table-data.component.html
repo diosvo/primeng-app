@@ -1,7 +1,7 @@
 <!-- <app-shadow-test></app-shadow-test> -->
 <h1>List of Customers</h1>
 
-<p-table [value]="customers" [autoLayout]="true" [paginator]="true" [rows]="10" sortField="date" [sortOrder]="-1">
+<p-table [value]="customers" [resizableColumns]="true" [autoLayout]="true" [paginator]="true" [rows]="10" sortField="date" [sortOrder]="-1">
     <ng-template pTemplate="header">
         <tr>
             <th>ID</th>
@@ -59,7 +59,7 @@
             <td>{{customer.representative.name}}</td>
             <td>{{customer.date}}</td>
             <td>{{customer.status}}</td>
-            <td>{{customer.activity}}</td>
+            <td><p-progressBar [value]="customer.activity" [showValue]="false"></p-progressBar></td>
             <td><button class="p-button-outlined p-button-rounded p-button-secondary" pButton type="button"
                     icon="pi pi-cog" iconPos="left"></button></td>
         </tr>
