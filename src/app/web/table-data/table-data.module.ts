@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
+import { AvatarModule } from 'primeng/avatar';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
@@ -19,6 +20,7 @@ import { ShadowTestComponent } from '../shadow-test/shadow-test.component';
     CommonModule,
     FormsModule,
 
+    AvatarModule,
     TableModule,
     DropdownModule,
     ButtonModule,
