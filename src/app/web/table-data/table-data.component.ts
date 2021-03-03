@@ -24,8 +24,6 @@ export class TableDataComponent implements OnInit {
   ngOnInit(): void {
     this._customerService.onGetAllCustomer().subscribe(result => {
       this.customers = result
-      console.log(result);
-
     })
   }
 }

@@ -1,26 +1,52 @@
 <!-- <app-shadow-test></app-shadow-test> -->
 <h1>List of Customers</h1>
-<p-table [value]="customers" [autoLayout]="true" [paginator]="true" [rows]="10">
+
+<p-table [value]="customers" [autoLayout]="true" [paginator]="true" [rows]="10" sortField="date" [sortOrder]="-1">
     <ng-template pTemplate="header">
         <tr>
             <th>ID</th>
-            <th pSortableColumn="name">Name
-                <p-sortIcon field="name"></p-sortIcon>
+            <th pSortableColumn="name">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Name
+                    <p-sortIcon field="name"></p-sortIcon>
+                    <p-columnFilter class="p-ml-auto" type="text" field="name" display="menu"></p-columnFilter>
+                </div>
             </th>
-            <th pSortableColumn="country.name">Country
-                <p-sortIcon field="country.name"></p-sortIcon>
+            <th pSortableColumn="country.name">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Country
+                    <p-sortIcon field="country.name"></p-sortIcon>
+                    <p-columnFilter class="p-ml-auto" type="text" field="country.name" display="menu"></p-columnFilter>
+                </div>
             </th>
-            <th pSortableColumn="representative.name">Agent
-                <p-sortIcon field="representative.name"></p-sortIcon>
+            <th pSortableColumn="representative.name">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Agent
+                    <p-sortIcon field="representative.name"></p-sortIcon>
+                    <p-columnFilter class="p-ml-auto" type="text" field="representative.name" display="menu">
+                    </p-columnFilter>
+                </div>
             </th>
-            <th pSortableColumn="date">Date
-                <p-sortIcon field="date"></p-sortIcon>
+            <th pSortableColumn="date">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Date
+                    <p-sortIcon field="date"></p-sortIcon>
+                    <p-columnFilter class="p-ml-auto" type="text" field="date" display="menu"></p-columnFilter>
+                </div>
             </th>
-            <th pSortableColumn="status">Status
-                <p-sortIcon field="status"></p-sortIcon>
+            <th pSortableColumn="status">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Status
+                    <p-sortIcon field="status"></p-sortIcon>
+                    <p-columnFilter class="p-ml-auto" type="text" field="status" display="menu"></p-columnFilter>
+                </div>
             </th>
-            <th pSortableColumn="activity">Activity
-                <p-sortIcon field="status"></p-sortIcon>
+            <th pSortableColumn="activity">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Activity
+                    <p-sortIcon field="status"></p-sortIcon>
+                    <p-columnFilter class="p-ml-auto" type="text" field="activity" display="menu"></p-columnFilter>
+                </div>
             </th>
             <th></th>
         </tr>
