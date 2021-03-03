@@ -27,9 +27,6 @@ export class TableDataComponent implements OnInit {
     this._customerService.onGetAllCustomer().subscribe(result => {
       this.customers = result;
     })
-
-    console.log(this.statuses);
-    
   }
 
   filterMatchMode() {

@@ -4,10 +4,6 @@
     <ng-template pTemplate="caption">
         <div class="table-header p-text-uppercase p-text-center">
             List of Customers
-            <!-- <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
-            </span> -->
         </div>
     </ng-template>
 
@@ -59,23 +55,6 @@
             </th>
             <th></th>
         </tr>
-
-        <!--         <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th>
-                <p-dropdown [options]="statuses"  styleClass="p-column-filter" placeholder="Select a Status" [showClear]="true">
-                    <ng-template let-option pTemplate="item">
-                        <span [class]="'customer-badge status-' + option.value">&#123;&#123;option.label&#125;&#125;</span>
-                    </ng-template>
-                </p-dropdown>
-            </th>
-            <th></th>
-            <th></th>
-        </tr> -->
     </ng-template>
 
     <ng-template pTemplate="body" let-customer>
@@ -84,11 +63,24 @@
             <td>{{customer.name}}</td>
             <td>{{customer.country.name}}</td>
             <td class="p-d-flex p-ai-center">
-                <p-avatar icon="pi pi-user" styleClass="p-mr-2" shape="circle"></p-avatar>
+                <p-avatar icon="pi pi-user" styleClass="p-mr-3" shape="circle"></p-avatar>
                 {{customer.representative.name}}
             </td>
             <td>{{customer.date}}</td>
-            <td class="p-text-uppercase">{{customer.status}}</td>
+            <td class="" [ngSwitch]="customer.status">
+                <span class="p-py-1 p-px-2 p-text-bold p-text-uppercase customer-badge status-unqualified"
+                    *ngSwitchCase="'unqualified'">{{customer.status}}</span>
+                <span class="p-py-1 p-px-2 p-text-bold p-text-uppercase customer-badge status-qualified"
+                    *ngSwitchCase="'qualified'">{{customer.status}}</span>
+                <span class="p-py-1 p-px-2 p-text-bold p-text-uppercase customer-badge status-new"
+                    *ngSwitchCase="'new'">{{customer.status}}</span>
+                <span class="p-py-1 p-px-2 p-text-bold p-text-uppercase customer-badge status-negotiation"
+                    *ngSwitchCase="'negotiation'">{{customer.status}}</span>
+                <span class="p-py-1 p-px-2 p-text-bold p-text-uppercase customer-badge status-renewal"
+                    *ngSwitchCase="'renewal'">{{customer.status}}</span>
+                <span class="p-py-1 p-px-2 p-text-bold p-text-uppercase customer-badge status-proposal"
+                    *ngSwitchCase="'proposal'">{{customer.status}}</span>
+            </td>
             <td>
                 <p-progressBar [value]="customer.activity" [showValue]="false"></p-progressBar>
             </td>

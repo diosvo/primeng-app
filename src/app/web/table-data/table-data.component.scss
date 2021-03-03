@@ -1,7 +1,7 @@
 ::ng-deep {
 
     .p-datatable-wrapper {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .p-progressbar {
@@ -21,5 +21,42 @@
     .p-button.p-button-icon-only.p-button-rounded {
         width : 2rem;
         height: 2rem;
+    }
+}
+
+.customer-badge {
+    border-radius: 2px;
+
+    font-size     : 12px;
+    letter-spacing: .3px;
+
+    &.status-renewal {
+        background-color: #eccfff;
+        color           : #694382;
+    }
+
+    &.status-new {
+        background-color: #b3e5fc;
+        color           : #23547b;
+    }
+
+    &.status-unqualified {
+        background-color: #ffcdd2;
+        color           : #c63737
+    }
+
+    &.status-qualified {
+        background-color: #c8e6c9;
+        color           : #256029;
+    }
+
+    &.status-proposal {
+        background-color: #ffd8b2;
+        color           : #805b36;
+    }
+
+    &.status-negotiation {
+        background-color: #feedaf;
+        color           : #8a5340;
     }
 }
