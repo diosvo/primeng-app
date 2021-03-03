@@ -40,7 +40,6 @@ import { ShadowTestComponent } from '../shadow-test/shadow-test.component';
     ToastModule,
     InputTextModule,
     ProgressBarModule,
-    FormsModule,
 
     TableDataRoutingModule
   ]
