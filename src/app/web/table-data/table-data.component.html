@@ -1,15 +1,23 @@
-<!-- <app-shadow-test></app-shadow-test> -->
-<p-table [value]="customers" [resizableColumns]="true" [autoLayout]="true" [paginator]="true" [rows]="10"
-    sortField="date" [sortOrder]="-1">
+<p-table #dt dataKey="id" [value]="customers" [resizableColumns]="true" [responsive]="true" [autoLayout]="true"
+    [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" sortField="date" [sortOrder]="-1"
+    styleClass="p-datatable-customers p-datatable-gridlines"
+    [globalFilterFields]="['name','country.name','representative.name','status']">
+
     <ng-template pTemplate="caption">
-        <div class="table-header p-text-uppercase p-text-center">
-            List of Customers
+        <div>
+            <div class="table-header p-d-flex p-ai-center p-text-uppercase p-text-center">
+                List of Customers
+                <!-- <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText style="font-size: 14px;" type="text" placeholder="Global search..." />
+                </span> -->
+            </div>
         </div>
     </ng-template>
 
     <ng-template pTemplate="header">
         <tr>
-            <th>ID</th>
             <th pSortableColumn="name">
                 <div class="p-d-flex p-jc-between p-ai-center">
                     Name
@@ -21,14 +29,16 @@
                 <div class="p-d-flex p-jc-between p-ai-center">
                     Country
                     <p-sortIcon field="country.name"></p-sortIcon>
-                    <p-columnFilter class="p-ml-auto" type="text" field="country.name" display="menu"></p-columnFilter>
+                    <p-columnFilter matchMode="contains" class="p-ml-auto" type="text" field="country.name"
+                        display="menu"></p-columnFilter>
                 </div>
             </th>
             <th pSortableColumn="representative.name">
                 <div class="p-d-flex p-jc-between p-ai-center">
                     Agent
                     <p-sortIcon field="representative.name"></p-sortIcon>
-                    <p-columnFilter class="p-ml-auto" type="text" field="representative.name" display="menu">
+                    <p-columnFilter matchMode="contains" class="p-ml-auto" type="text" field="representative.name"
+                        display="menu">
                     </p-columnFilter>
                 </div>
             </th>
@@ -36,22 +46,20 @@
                 <div class="p-d-flex p-jc-between p-ai-center">
                     Date
                     <p-sortIcon field="date"></p-sortIcon>
-                    <p-columnFilter class="p-ml-auto" type="text" field="date" display="menu"></p-columnFilter>
+                    <p-columnFilter class="p-ml-auto" type="date" field="date" display="menu"></p-columnFilter>
                 </div>
             </th>
-            <th pSortableColumn="status">
+            <th pSortableColumn="status" matchMode="equals">
                 <div class="p-d-flex p-jc-between p-ai-center">
                     Status
                     <p-sortIcon field="status"></p-sortIcon>
-                    <p-columnFilter class="p-ml-auto" type="text" field="status" display="menu"></p-columnFilter>
+                    <p-columnFilter matchMode="contains" class="p-ml-auto" type="text" field="status" display="menu">
+                    </p-columnFilter>
                 </div>
             </th>
             <th pSortableColumn="activity">
-                <div class="p-d-flex p-jc-between p-ai-center">
-                    Activity
-                    <p-sortIcon field="status"></p-sortIcon>
-                    <p-columnFilter class="p-ml-auto" type="text" field="activity" display="menu"></p-columnFilter>
-                </div>
+                Activity
+                <p-sortIcon field="status"></p-sortIcon>
             </th>
             <th></th>
         </tr>
@@ -59,14 +67,16 @@
 
     <ng-template pTemplate="body" let-customer>
         <tr>
-            <td>{{customer.id}}</td>
             <td>{{customer.name}}</td>
-            <td>{{customer.country.name}}</td>
+            <td>
+                <img [class]="'flag flag-' + customer.country.code" width="30" height="20.45">
+                <span class="p-ml-2">{{customer.country.name}}</span>
+            </td>
             <td class="p-d-flex p-ai-center">
-                <p-avatar icon="pi pi-user" styleClass="p-mr-3" shape="circle"></p-avatar>
+                <p-avatar icon="pi pi-user" styleClass="p-mr-2" shape="circle"></p-avatar>
                 {{customer.representative.name}}
             </td>
-            <td>{{customer.date}}</td>
+            <td>{{customer.date | date: 'MM/dd/yyyy'}}</td>
             <td class="" [ngSwitch]="customer.status">
                 <span class="p-py-1 p-px-2 p-text-bold p-text-uppercase customer-badge status-unqualified"
                     *ngSwitchCase="'unqualified'">{{customer.status}}</span>
@@ -86,6 +96,12 @@
             </td>
             <td class="p-text-center"><button class="p-button-sm p-button-outlined p-button-rounded p-button-secondary"
                     pButton type="button" icon="pi pi-cog" iconPos="left"></button></td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td class="p-text-center" [attr.colspan]="customers.length">No customers found.</td>
         </tr>
     </ng-template>
 </p-table>

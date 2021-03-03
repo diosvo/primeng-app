@@ -1,3 +1,5 @@
+@use '../../../assets/scss/flags.scss';
+
 ::ng-deep {
 
     .p-datatable-wrapper {
@@ -14,8 +16,18 @@
         }
     }
 
-    .p-datatable .p-datatable-tbody>tr>td {
-        padding: 0.5rem 1rem;
+    .p-datatable {
+        .p-paginator {
+            justify-content: flex-end;
+        }
+
+        .p-paginator-bottom * {
+            font-size: 14px;
+        }
+
+        .p-datatable-tbody>tr>td {
+            padding: 0.5rem 1rem;
+        }
     }
 
     .p-button.p-button-icon-only.p-button-rounded {
