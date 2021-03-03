@@ -1,7 +1,7 @@
 <p-table #dt dataKey="id" [value]="customers" [resizableColumns]="true" [responsive]="true" [autoLayout]="true"
     [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]" [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" sortField="date" [sortOrder]="-1"
-    styleClass="p-datatable-customers p-datatable-gridlines"
+    styleClass="p-datatable-customers"
     [globalFilterFields]="['name','country.name','representative.name','status']">
 
     <ng-template pTemplate="caption">
@@ -69,7 +69,7 @@
         <tr>
             <td>{{customer.name}}</td>
             <td>
-                <img [class]="'flag flag-' + customer.country.code" width="30" height="20.45">
+                <img src="../../../assets/flag_placeholder.png" [class]="'flag flag-' + customer.country.code" width="30">
                 <span class="p-ml-2">{{customer.country.name}}</span>
             </td>
             <td class="p-d-flex p-ai-center">
