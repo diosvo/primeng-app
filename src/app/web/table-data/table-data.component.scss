@@ -1,9 +1,13 @@
 @use '../../../assets/scss/flags.scss';
 
+%defaultFS {
+    font-size: 14px;
+}
+
 ::ng-deep {
 
     .p-datatable-wrapper {
-        font-size: 14px;
+        @extend %defaultFS;
     }
 
     .p-progressbar {
@@ -22,7 +26,7 @@
         }
 
         .p-paginator-bottom * {
-            font-size: 14px;
+            @extend %defaultFS;
         }
 
         .p-datatable-tbody>tr>td {
@@ -33,6 +37,10 @@
     .p-button.p-button-icon-only.p-button-rounded {
         width : 2rem;
         height: 2rem;
+    }
+
+    .p-tooltip {
+        @extend %defaultFS;
     }
 }
 

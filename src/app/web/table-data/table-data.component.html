@@ -1,5 +1,5 @@
 <p-table #dt dataKey="id" [value]="customers" [resizableColumns]="true" [responsive]="true" [autoLayout]="true"
-    [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]" [showCurrentPageReport]="true"
+    [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,25,50]" [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" sortField="date" [sortOrder]="-1"
     styleClass="p-datatable-customers" [globalFilterFields]="['name','country.name','representative.name','status']">
 
@@ -9,7 +9,7 @@
                 List of Customers
                 <!-- <span class="p-input-icon-left p-ml-auto">
                     <i class="pi pi-search"></i>
-                    <input pInputText style="font-size: 14px;" type="text" placeholder="Global search..." />
+                    <input pInputText style="font-size: 14px;" (input)="dt.filterGlobal($event, 'contains')" type="text" placeholder="Global search..." />
                 </span> -->
             </div>
         </div>
@@ -21,7 +21,8 @@
                 <div class="p-d-flex p-jc-between p-ai-center">
                     Name
                     <p-sortIcon field="name"></p-sortIcon>
-                    <p-columnFilter class="p-ml-auto" type="text" field="name" display="menu"></p-columnFilter>
+                    <p-columnFilter matchMode="contains" class="p-ml-auto" type="text" field="name" display="menu">
+                    </p-columnFilter>
                 </div>
             </th>
             <th pSortableColumn="country.name">
@@ -101,10 +102,11 @@
                     *ngSwitchCase="'proposal'">{{customer.status}}</span>
             </td>
             <td>
-                <p-progressBar [value]="customer.activity" [showValue]="false"></p-progressBar>
+                <p-progressBar [value]="customer.activity" [showValue]="false" [pTooltip]="customer.activity + '%'"
+                    tooltipPosition="top"></p-progressBar>
             </td>
             <td class="p-text-center"><button class="p-button-sm p-button-outlined p-button-rounded p-button-secondary"
-                    pButton type="button" icon="pi pi-cog" iconPos="left"></button></td>
+                    pButton type="button" icon="pi pi-cog"></button></td>
         </tr>
     </ng-template>
 

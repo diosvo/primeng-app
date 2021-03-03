@@ -29,10 +29,18 @@ export class TableDataComponent implements OnInit {
     this._customerService.onGetAllCustomer().subscribe(result => {
       this.customers = result;
     })
+
+    this.customers.forEach(
+      customer => {
+        // console.log(new Date(customer.date));
+        
+        (customer.date = new Date(customer.date))
+      }
+    );
   }
 
   ngAfterViewInit() {
-    console.log(this.table.filterGlobal)
-    console.log(this.table)
+    /* console.log(this.table.filterGlobal)
+    console.log(this.table) */
   }
 }

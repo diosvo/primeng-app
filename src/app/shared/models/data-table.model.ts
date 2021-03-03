@@ -3,7 +3,7 @@ export interface ICustomer {
     name?: string;
     country?: ICountry;
     representative?: IRepresentative;
-    date?: string;
+    date?: string | Date;
     company?: string;
     status?: string;
     activity?: number;

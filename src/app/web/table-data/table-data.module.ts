@@ -3,11 +3,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { TableModule } from 'primeng/table';
-import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { SliderModule } from 'primeng/slider';
 import { AvatarModule } from 'primeng/avatar';
+import { TooltipModule } from 'primeng/tooltip';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
@@ -33,11 +33,11 @@ import { ShadowTestComponent } from '../shadow-test/shadow-test.component';
     CalendarModule,
     SliderModule,
     DialogModule,
+    TooltipModule,
     MultiSelectModule,
     ContextMenuModule,
     DropdownModule,
     ButtonModule,
-    ToastModule,
     InputTextModule,
     ProgressBarModule,
 
