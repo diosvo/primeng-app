@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MegaMenuItem, MessageService, PrimeNGConfig } from 'primeng/api';
+import { MenuItem, MessageService, PrimeNGConfig } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Data } from 'src/app/configs/data-table/data';
 import { CustomerService } from 'src/app/core/services/customer.service';
@@ -17,7 +17,7 @@ export class TableDataComponent implements OnInit {
   // Definition
   customers: ICustomer[];
   selectedCustomers: ICustomer[];
-  items: MegaMenuItem[];
+  items: MenuItem[];
 
   cols: any[];
   exportColumns: any[];
@@ -48,9 +48,12 @@ export class TableDataComponent implements OnInit {
       { field: 'date', header: 'Date' },
       { field: 'status', header: 'Status' },
       { field: 'activity', header: 'Activity' },
+      { field: 'config', header: '' },
     ];
 
     this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field }));
+
+    this.buttonExportFiles();
   }
 
   @Input() get selectedColumns(): any[] {
@@ -74,6 +77,35 @@ export class TableDataComponent implements OnInit {
   /* 
   - Export files
   */
+
+  buttonExportFiles() {
+    this.items = [{
+      label: 'File',
+      items: [{
+        label: 'CSV',
+        icon: 'pi pi-file-o',
+        command: () => {
+          this.table.exportCSV();
+        }
+      },
+      {
+        label: 'Excel',
+        icon: 'pi pi-file-excel',
+        command: () => {
+          this.exportExcel();
+        }
+      },
+      {
+        label: 'PDF',
+        icon: 'pi pi-file-pdf',
+        command: () => {
+          this.exportPdf();
+        }
+      }
+      ]
+    }
+    ];
+  }
 
   exportPdf() {
     /* import("jspdf").then(jsPDF => {
@@ -109,8 +141,8 @@ export class TableDataComponent implements OnInit {
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
     let MM = String(today.getMonth() + 1).padStart(2, '0');
-    let yyyy = today.getFullYear();    
+    let yyyy = today.getFullYear();
 
-    return `${ MM + '/' + dd + '/' + yyyy}`;
+    return `${MM + '/' + dd + '/' + yyyy}`;
   }
 }
