@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ToastModule} from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 
 import { BudgetComponent } from './budget.component';
 import { BudgetRoutingModule } from './budget-routing.module';

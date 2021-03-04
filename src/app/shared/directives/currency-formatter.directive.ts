@@ -1,5 +1,5 @@
-import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[currencyFormatter]'
@@ -7,11 +7,12 @@ import { DecimalPipe } from '@angular/common';
 
 export class CurrencyFormatterDirective {
   currencyChars = new RegExp('[\.,]', 'g'); // Remove commas and dots
+  numberChars = new RegExp("[^0-9]", "g"); // match any characters except numbers
 
-  constructor(public el: ElementRef, public renderer: Renderer2, private decimalPipe: DecimalPipe) {}
+  constructor(public el: ElementRef, public renderer: Renderer2, private decimalPipe: DecimalPipe) { }
 
   ngOnInit() {
-    this.format(this.el.nativeElement.value); // Format any initial values
+    this.format(this.el.nativeElement.value);
   }
 
   @HostListener('input', ["$event.target.value"]) onInput(e: string) {
@@ -23,10 +24,9 @@ export class CurrencyFormatterDirective {
     this.format(event.clipboardData.getData('text/plain'));
   }
 
-  format(val:string) {
+  format(val: string) {
     // 1. test for non-number characters and replace/remove them
     const numberFormat = parseInt(String(val).replace(this.currencyChars, ''));
-    // console.log(numberFormat); // raw number
 
     // 2. format the number (add commas)
     const usd = this.decimalPipe.transform(numberFormat, '1.0', 'en-US');

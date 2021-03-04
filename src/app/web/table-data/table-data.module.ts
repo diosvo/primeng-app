@@ -1,28 +1,26 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 
-import { TableModule } from 'primeng/table';
-import { DialogModule } from 'primeng/dialog';
-import { ButtonModule } from 'primeng/button';
-import { SliderModule } from 'primeng/slider';
 import { AvatarModule } from 'primeng/avatar';
-import { TooltipModule } from 'primeng/tooltip';
-import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
-import { InputTextModule } from 'primeng/inputtext';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { MultiSelectModule } from 'primeng/multiselect';
 import { ContextMenuModule } from 'primeng/contextmenu';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { SliderModule } from 'primeng/slider';
+import { TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { TableDataRoutingModule } from './table-data-routing.module';
 import { TableDataComponent } from './table-data.component';
 
-import { TestComponent } from '../test/test.component';
-import { ShadowTestComponent } from '../shadow-test/shadow-test.component';
 
 @NgModule({
-  declarations: [TableDataComponent, TestComponent, ShadowTestComponent],
+  declarations: [TableDataComponent],
   imports: [
     CommonModule,
     FormsModule,
