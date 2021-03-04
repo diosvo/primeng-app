@@ -33,7 +33,9 @@
 
     <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="name">Name
+            <th></th>
+            <th pSortableColumn="name">
+                Name
                 <p-sortIcon field="name"></p-sortIcon>
             </th>
             <th pSortableColumn="country.name">
@@ -60,13 +62,16 @@
         </tr>
 
         <tr>
-            <th style="max-width: 200px;">
+            <th [style]="{width: '30px'}">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th [style]="{maxWidth: '150px'}">
                 <p-columnFilter matchMode="contains" type="text" field="name"></p-columnFilter>
             </th>
-            <th style="max-width: 200px;">
+            <th [style]="{maxWidth: '150px'}">
                 <p-columnFilter matchMode="contains" type="text" field="country.name"></p-columnFilter>
             </th>
-            <th style="max-width: 200px;">
+            <th [style]="{maxWidth: '100px'}">
                 <p-columnFilter field="representative" matchMode="in" [showMenu]="false">
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                         <p-multiSelect [ngModel]="value" [options]="representatives" placeholder="Any"
@@ -80,10 +85,10 @@
                     </ng-template>
                 </p-columnFilter>
             </th>
-            <th>
+            <th [style]="{width: '250px'}">
                 <p-columnFilter class="p-ml-auto" type="date" field="date"></p-columnFilter>
             </th>
-            <th>
+            <th [style]="{width: '200px'}">
                 <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                         <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)"
@@ -96,14 +101,15 @@
                     </ng-template>
                 </p-columnFilter>
             </th>
-            <th colspan="2">
-
-            </th>
+            <th colspan="2"></th>
         </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-customer>
         <tr>
+            <td>
+                <p-tableCheckbox [value]="customer"></p-tableCheckbox>
+            </td>
             <td>
                 {{customer.name}}
             </td>
@@ -125,8 +131,13 @@
                 <p-progressBar [value]="customer.activity" [showValue]="false" [pTooltip]="customer.activity + '%'"
                     tooltipPosition="top"></p-progressBar>
             </td>
-            <td class="p-text-center"><button class="p-button-sm p-button-outlined p-button-rounded p-button-secondary"
-                    pButton type="button" icon="pi pi-cog"></button></td>
+            <td class="p-text-center">
+                <button pButton pRipple icon="pi pi-pencil"
+                    class="p-button-rounded p-button-text p-button-success p-mr-2"
+                    (click)="editCustomer(customer)"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"
+                    (click)="deleteCustomer(customer)"></button>
+            </td>
         </tr>
     </ng-template>
 
@@ -136,3 +147,12 @@
         </tr>
     </ng-template>
 </p-table>
+
+<p-confirmDialog #cd [style]="{width: '450px'}" [dismissableMask]="true">
+    <p-footer>
+        <button class="p-button-raised p-button-text p-button-plain" type="button" pButton icon="pi pi-times" label="No"
+            (click)="cd.reject()"></button>
+        <button class="p-button-raised p-button-text p-button-danger" type="button" pButton icon="pi pi-check"
+            label="Yes" (click)="cd.accept()"></button>
+    </p-footer>
+</p-confirmDialog>

@@ -42,6 +42,10 @@
     .p-tooltip {
         @extend %defaultFS;
     }
+
+    .p-calendar .p-datepicker {
+        width: 20vw;
+    }
 }
 
 .customer-badge {

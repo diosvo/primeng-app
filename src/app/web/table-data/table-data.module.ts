@@ -15,6 +15,7 @@ import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { TableDataRoutingModule } from './table-data-routing.module';
 import { TableDataComponent } from './table-data.component';
 
@@ -41,6 +42,7 @@ import { TableDataComponent } from './table-data.component';
     ToastModule,
     MultiSelectModule,
     MenuModule,
+    ConfirmDialogModule,
     TableDataRoutingModule
   ]
 })

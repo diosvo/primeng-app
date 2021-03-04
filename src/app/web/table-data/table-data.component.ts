@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MenuItem, MessageService, PrimeNGConfig } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService, PrimeNGConfig } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Data } from 'src/app/configs/data-table/data';
 import { CustomerService } from 'src/app/core/services/customer.service';
@@ -9,7 +9,7 @@ import { ICustomer, IRepresentative, IStatus } from 'src/app/shared/models/data-
   selector: 'app-table-data',
   templateUrl: './table-data.component.html',
   styleUrls: ['./table-data.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
 })
 
 export class TableDataComponent implements OnInit {
@@ -27,12 +27,13 @@ export class TableDataComponent implements OnInit {
   representatives: IRepresentative[] = Data.Representatives;
 
   @ViewChild('dt') table: Table;
-  selectedItem: ICustomer;
+  customer: ICustomer;
   loading: boolean;
   exportName = "customers"
 
   constructor(private _customerService: CustomerService,
     private _messageService: MessageService,
+    private _confirmationService: ConfirmationService,
     private _primengConfig: PrimeNGConfig,
     private _cdr: ChangeDetectorRef) { }
 
@@ -144,5 +145,28 @@ export class TableDataComponent implements OnInit {
     let yyyy = today.getFullYear();
 
     return `${MM + '/' + dd + '/' + yyyy}`;
+  }
+
+  /* 
+  - Customer functions
+  */
+
+  editCustomer(customer: ICustomer) {
+
+  }
+
+  deleteCustomer(customer: ICustomer) {
+    this._confirmationService.confirm({
+      message: 'Are you sure you want to delete ' + customer.name + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.customers = this.customers.filter(val => val.id !== customer.id);
+        console.log(this.customers);
+        
+        this.customer = {};
+        this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Customer Deleted', life: 3000 });
+      }
+    });
   }
 }
