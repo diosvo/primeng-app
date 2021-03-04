@@ -1,14 +1,20 @@
 <p-toast></p-toast>
 
-<p-table #dt  dataKey="id" [value]="customers" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [totalRecords]="totalRecords" [loading]="loading" [resizableColumns]="true" [responsive]="true" [autoLayout]="true"
-    [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,25,50]" [showCurrentPageReport]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" sortField="date" [sortOrder]="-1"
-    styleClass="p-datatable-customers" [globalFilterFields]="['name','country.name','representative.name','status']">
+<p-table #dt dataKey="id" [columns]="cols" [value]="customers" [resizableColumns]="true" [responsive]="true"
+    [autoLayout]="true" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,25,50]"
+    [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    sortField="date" [sortOrder]="-1" styleClass="p-datatable-customers" [exportFilename]="exportName"
+    selectionMode="multiple" [(selection)]="selectedCustomers">
 
     <ng-template pTemplate="caption">
         <div>
-            <div class="table-header p-d-flex p-ai-center p-text-uppercase p-text-center">
-                List of Customers
+            <div class="table-header p-d-flex p-jc-between p-ai-center">
+                <div>
+                    <h4 class="p-text-uppercase">List of Customers</h4>
+                    <!-- <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+                        selectedItemsLabel="{0} columns selected" [style]="{minWidth: '250px'}"
+                        placeholder="Choose Columns"></p-multiSelect> -->
+                </div>
                 <!-- <span class="p-input-icon-left p-ml-auto">
                     <i class="pi pi-search"></i>
                     <input pInputText style="font-size: 14px;" (input)="dt.filterGlobal($event, 'contains')" type="text" placeholder="Global search..." />
@@ -20,6 +26,18 @@
                     <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf()" class="ui-button-warning"></button>
                     <button type="button" pButton icon="pi pi-file" iconPos="left" label="CSV - Selection Only" (click)="dt.exportCSV({selectionOnly:true})" style="float:right"></button>
                 </div> -->
+
+                <div class="p-d-flex">
+                    <button type="button" pButton pRipple icon="pi pi-file-o" (click)="dt.exportCSV()"
+                        class="p-button-raised p-button-outlined" pTooltip="CSV" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                        class="p-button-success p-button-raised p-button-outlined  p-mx-2" pTooltip="XLS"
+                        tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+                        class="p-button-warning p-button-raised p-button-outlined" pTooltip="PDF"
+                        tooltipPosition="bottom"></button>
+                </div>
+
             </div>
         </div>
     </ng-template>
@@ -119,9 +137,9 @@
         </tr>
     </ng-template>
 
-    <!-- <ng-template pTemplate="emptymessage">
+    <ng-template pTemplate="emptymessage">
         <tr>
-            <td class="p-text-center" [attr.colspan]="customers.length">No customers found.</td>
+            <td class="p-text-center p-py-2" [attr.colspan]="customers.length">No customers found.</td>
         </tr>
-    </ng-template> -->
+    </ng-template>
 </p-table>

@@ -39,7 +39,7 @@ import { TableDataComponent } from './table-data.component';
     InputTextModule,
     ProgressBarModule,
     ToastModule,
-
+		MultiSelectModule,
     TableDataRoutingModule
   ]
 })
