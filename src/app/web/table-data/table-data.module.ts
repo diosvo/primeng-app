@@ -13,11 +13,11 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
+import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 
 import { TableDataRoutingModule } from './table-data-routing.module';
 import { TableDataComponent } from './table-data.component';
-
 
 @NgModule({
   declarations: [TableDataComponent],
@@ -38,6 +38,7 @@ import { TableDataComponent } from './table-data.component';
     ButtonModule,
     InputTextModule,
     ProgressBarModule,
+    ToastModule,
 
     TableDataRoutingModule
   ]

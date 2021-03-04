@@ -1,4 +1,6 @@
-<p-table #dt dataKey="id" [value]="customers" [resizableColumns]="true" [responsive]="true" [autoLayout]="true"
+<p-toast></p-toast>
+
+<p-table #dt  dataKey="id" [value]="customers" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [totalRecords]="totalRecords" [loading]="loading" [resizableColumns]="true" [responsive]="true" [autoLayout]="true"
     [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,25,50]" [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" sortField="date" [sortOrder]="-1"
     styleClass="p-datatable-customers" [globalFilterFields]="['name','country.name','representative.name','status']">
@@ -11,6 +13,13 @@
                     <i class="pi pi-search"></i>
                     <input pInputText style="font-size: 14px;" (input)="dt.filterGlobal($event, 'contains')" type="text" placeholder="Global search..." />
                 </span> -->
+
+                <!-- <div class="ui-helper-clearfix  p-ml-auto">
+                    <button type="button" pButton icon="pi pi-file-o" iconPos="left" label="CSV" (click)="dt.exportCSV()" style="margin-right: 0.5em;"></button>
+                    <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
+                    <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf()" class="ui-button-warning"></button>
+                    <button type="button" pButton icon="pi pi-file" iconPos="left" label="CSV - Selection Only" (click)="dt.exportCSV({selectionOnly:true})" style="float:right"></button>
+                </div> -->
             </div>
         </div>
     </ng-template>
@@ -75,7 +84,7 @@
     </ng-template>
 
     <ng-template pTemplate="body" let-customer>
-        <tr>
+        <tr (click)="selectCustomer(customer)">
             <td>{{customer.name}}</td>
             <td>
                 <img src="../../../assets/flag_placeholder.png" [class]="'flag flag-' + customer.country.code"
@@ -110,9 +119,9 @@
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="emptymessage">
+    <!-- <ng-template pTemplate="emptymessage">
         <tr>
             <td class="p-text-center" [attr.colspan]="customers.length">No customers found.</td>
         </tr>
-    </ng-template>
+    </ng-template> -->
 </p-table>
