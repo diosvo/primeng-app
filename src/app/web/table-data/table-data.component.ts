@@ -1,6 +1,5 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ConfirmationService, MenuItem, MessageService, PrimeNGConfig } from 'primeng/api';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Data } from 'src/app/configs/data-table/data';
 import { CustomerService } from 'src/app/core/services/customer.service';
@@ -31,12 +30,12 @@ export class TableDataComponent implements OnInit {
   loading: boolean;
   submitted: boolean;
   customerDialog: boolean;
-  exportName = "customers"
+  dialogTitle: string;
+  exportName = "customers";
 
   constructor(private _customerService: CustomerService,
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService,
-    private _primengConfig: PrimeNGConfig,
     private _cdr: ChangeDetectorRef) { }
 
   async ngOnInit() {
@@ -55,8 +54,6 @@ export class TableDataComponent implements OnInit {
     // For lazy ding
     // NG0100: ExpressionChangedAfterItHasBeenCheckedError
     this._cdr.detectChanges();
-
-    console.log(this.table);
   }
 
   /* 
@@ -116,9 +113,39 @@ export class TableDataComponent implements OnInit {
   - Customer functions
   */
 
+  async createNewCustomer() {
+    this.dialogTitle = "Create New Customer"
+    this.customer = {};
+    this.submitted = false;
+    this.customerDialog = true;
+  }
+
   editCustomer(customer: ICustomer) {
+    this.dialogTitle = "Update Customer Details"
     this.customer = { ...customer };
     this.customerDialog = true;
+  }
+
+  async saveCustomer(customer: ICustomer) {
+    this.submitted = true;
+
+    if (this.customer.name.trim()) {
+      {
+        if (this.customer.id) {
+          this.customers[this.findIndexById(customer.id)] = this.customer;
+          this._messageService.add({ severity: 'info', summary: 'Successful', detail: 'Customer Updated', life: 3000 });
+        } else {
+          this.customer.id = this.createId();
+          this.customer.date = this.getCurrentDay()
+          this.customers.push(this.customer);
+          this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Customer Created', life: 3000 });
+        }
+
+        this.customers = [...this.customers];
+        this.customerDialog = false;
+        this.customer = {};
+      }
+    }
   }
 
   async deleteCustomer(customer: ICustomer) {
@@ -152,24 +179,7 @@ export class TableDataComponent implements OnInit {
     this.submitted = false;
   }
 
-  async saveCustomer(customer: ICustomer) {
-    this.submitted = true;
-
-    if (this.customer.name.trim()) {
-      {
-        if (this.customer.id) {
-          this.customers[this.findIndexById(customer.id)] = this.customer;           
-          this._messageService.add({ severity: 'info', summary: 'Successful', detail: 'Customer Updated', life: 3000 });
-        }
-
-        this.customers = [...this.customers];
-        this.customerDialog = false;
-        this.customer = {};
-      }
-    }
-  }
-
-  findIndexById(id: number): number {
+  private findIndexById(id: number): number {
     let index = -1;
     for (let i = 0; i < this.customers.length; i++) {
       if (this.customers[i].id === id) {
@@ -178,5 +188,10 @@ export class TableDataComponent implements OnInit {
       }
     }
     return index;
+  }
+
+  private createId(): number {
+    let id: number = this.customers.length + 1;
+    return id;
   }
 }

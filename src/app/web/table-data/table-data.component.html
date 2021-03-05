@@ -3,7 +3,7 @@
 <p-toolbar styleClass="p-mb-2">
     <ng-template pTemplate="left">
         <button pButton pRipple icon="pi pi-plus" class="p-button-raised p-button-outlined p-button-success p-mr-2"
-            pTooltip="New" tooltipPosition="bottom"></button>
+            pTooltip="New" tooltipPosition="bottom" (click)="createNewCustomer()"></button>
         <button pButton pRipple icon="pi pi-trash" class="p-button-raised p-button-danger" pTooltip="Multiple Delete"
             tooltipPosition="bottom" [disabled]="!selectedCustomers || !selectedCustomers.length"
             [ngClass]="{'p-button-outlined': !selectedCustomers || !selectedCustomers.length}"
@@ -17,10 +17,11 @@
     </ng-template>
 </p-toolbar>
 
+<!-- Table -->
 <p-table #dt [value]="customers" dataKey="id" [rows]="10" [showCurrentPageReport]="true" [responsive]="true"
     [autoLayout]="true" [rowsPerPageOptions]="[5,10,25,50]" [loading]="loading" styleClass="p-datatable-customers"
     [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [globalFilterFields]="['name','country.name','representative.name','status']" sortField="date" [sortOrder]="-1"
+    [globalFilterFields]="['name','country.name','representative.name','status']" sortField="date" [sortOrder]="1"
     styleClass="p-datatable-customers" [exportFilename]="exportName" selectionMode="multiple"
     [(selection)]="selectedCustomers">
 
@@ -160,7 +161,7 @@
 </p-table>
 
 <!-- Dialog -->
-<p-dialog [(visible)]="customerDialog" [style]="{width: '500px', overflow: 'auto'}" header="Customer Details"
+<p-dialog [(visible)]="customerDialog" [style]="{width: '500px', overflow: 'auto'}" [header]="dialogTitle"
     [modal]="true" styleClass="p-fluid" [dismissableMask]="true">
     <ng-template pTemplate="content">
         <div class="p-formgrid p-grid">
@@ -220,10 +221,17 @@
             </div>
         </div>
 
-        <div class="p-field">
-            <label for="name" class="f-14">Name</label>
-            <input type="text" pInputText id="name" [(ngModel)]="customer.name" required />
-            <small class="p-error" *ngIf="submitted && !customer.name">Name is required.</small>
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="name" class="f-14">Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="customer.name" required />
+                <small class="p-error" *ngIf="submitted && !customer.name">Name is required.</small>
+            </div>
+
+            <!-- <div class="p-field p-col">
+                <label for="date" class="f-14">Date</label>
+                <p-calendar [(ngModel)]="customer.date" [touchUI]="true" ></p-calendar>
+            </div> -->
         </div>
     </ng-template>
 
@@ -235,6 +243,7 @@
     </ng-template>
 </p-dialog>
 
+<!-- Confirm Dialog -->
 <p-confirmDialog #cd [style]="{width: '450px'}" [dismissableMask]="true">
     <p-footer>
         <button class="p-button-raised p-button-text p-button-plain" type="button" pButton icon="pi pi-times" label="No"
