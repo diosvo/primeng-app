@@ -165,7 +165,7 @@
     <ng-template pTemplate="content">
         <div class="p-formgrid p-grid">
             <div class="p-field p-col">
-                <label for="country">Country</label>
+                <label for="country" class="f-14">Country</label>
                 <p-dropdown [options]="countries" [(ngModel)]="customer.country" optionLabel="name" [filter]="true"
                     filterBy="name" [showClear]="true" placeholder="Select a Country">
                     <ng-template pTemplate="selectedItem">
@@ -187,19 +187,22 @@
             </div>
 
             <div class="p-field p-col">
-                <label for="representative">Agent</label>
-                <!-- <p-dropdown [(ngModel)]="customer.representative" inputId="representative" [options]="representatives"
-                    placeholder="Select an Agent">
-                    <ng-template let-option pTemplate="item">
-                        <span>{{option.name}}</span>
+                <label for="representative" class="f-14">Agent</label>
+                <p-dropdown [options]="representatives" [(ngModel)]="customer.representative" optionLabel="name"
+                    [filter]="true" filterBy="name" [showClear]="true" placeholder="Select an Agent">
+                    <ng-template pTemplate="selectedItem">
+                        <div>{{customer.representative.name}}</div>
                     </ng-template>
-                </p-dropdown> -->
+                    <ng-template let-item pTemplate="item">
+                        <div>{{item.name}}</div>
+                    </ng-template>
+                </p-dropdown>
             </div>
         </div>
 
         <div class="p-formgrid p-grid">
             <div class="p-field p-col">
-                <label for="status">Status</label>
+                <label for="status" class="f-14">Status</label>
                 <p-dropdown [(ngModel)]="customer.status" inputId="status" [options]="statuses"
                     placeholder="Select a Status">
                     <ng-template let-option pTemplate="item">
@@ -211,14 +214,14 @@
             </div>
 
             <div class="p-field p-col">
-                <label for="activity">Activity (%)</label>
+                <label for="activity" class="f-14">Activity (%)</label>
                 <input type="text" pInputText id="activity" [(ngModel)]="customer.activity" required />
                 <small class="p-error" *ngIf="submitted && !customer.activity">Activity is required.</small>
             </div>
         </div>
 
         <div class="p-field">
-            <label for="name">Name</label>
+            <label for="name" class="f-14">Name</label>
             <input type="text" pInputText id="name" [(ngModel)]="customer.name" required />
             <small class="p-error" *ngIf="submitted && !customer.name">Name is required.</small>
         </div>

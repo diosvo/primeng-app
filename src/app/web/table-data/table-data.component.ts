@@ -158,9 +158,7 @@ export class TableDataComponent implements OnInit {
     if (this.customer.name.trim()) {
       {
         if (this.customer.id) {
-          this.customers[this.findIndexById(customer.id)] = this.customer; 
-          console.log(this.customer);
-          
+          this.customers[this.findIndexById(customer.id)] = this.customer;           
           this._messageService.add({ severity: 'info', summary: 'Successful', detail: 'Customer Updated', life: 3000 });
         }
 
