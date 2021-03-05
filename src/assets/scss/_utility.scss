@@ -41,6 +41,14 @@ input {
     }
 }
 
+.isInvalid {
+    cursor: not-allowed;
+}
+
+.isValid {
+    cursor: pointer;
+}
+
 .w-100 {
     width: 100%;
 }

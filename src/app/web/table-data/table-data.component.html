@@ -20,7 +20,7 @@
         <button pButton pRipple icon="pi pi-plus"
             class="p-button-raised p-button-outlined p-button-success p-mr-2" pTooltip="New" tooltipPosition="bottom"></button>
         <button pButton pRipple icon="pi pi-trash" class="p-button-raised p-button-outlined p-button-danger"
-            pTooltip="Multiple Delete" tooltipPosition="bottom"></button>
+            pTooltip="Multiple Delete" tooltipPosition="bottom" [disabled]="!selectedCustomers || !selectedCustomers.length" [ngClass]="{'isInvalid ': !selectedCustomers}"></button>
     </ng-template>
 
     <ng-template pTemplate="right">
@@ -30,7 +30,7 @@
     </ng-template>
 </p-toolbar>
 
-<p-table #dt [value]="customers" [columns]="cols" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+<p-table id="data-table" #dt [value]="customers" [columns]="cols" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
     [responsive]="true" [autoLayout]="true" [rowsPerPageOptions]="[5,10,25,50]" [loading]="loading"
     styleClass="p-datatable-customers" [paginator]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -85,7 +85,7 @@
                 Activity
                 <p-sortIcon field="status"></p-sortIcon>
             </th>
-            <th></th>
+            <th class="p-text-center">Actions</th>
         </tr>
 
         <tr>

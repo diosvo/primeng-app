@@ -46,6 +46,13 @@
     .p-calendar .p-datepicker {
         width: 20vw;
     }
+
+    .p-button {
+
+        &:disabled {
+            cursor: not-allowed;
+        }
+    }
 }
 
 .customer-badge {

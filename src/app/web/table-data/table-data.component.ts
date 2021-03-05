@@ -49,7 +49,7 @@ export class TableDataComponent implements OnInit {
       { field: 'date', header: 'Date' },
       { field: 'status', header: 'Status' },
       { field: 'activity', header: 'Activity' },
-      { field: 'config', header: '' },
+      { field: 'config', header: 'Actions' },
     ];
 
     this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field }));
@@ -64,7 +64,6 @@ export class TableDataComponent implements OnInit {
   set selectedColumns(val: any[]) {
     this._selectedColumns = this.cols.filter(col => val.includes(col));
   }
-
   ngAfterViewInit() {
     // For lazy ding
     // NG0100: ExpressionChangedAfterItHasBeenCheckedError
@@ -95,27 +94,8 @@ export class TableDataComponent implements OnInit {
         command: () => {
           this.exportExcel();
         }
-      },
-      {
-        label: 'PDF',
-        icon: 'pi pi-file-pdf',
-        command: () => {
-          this.exportPdf();
-        }
-      }
-      ]
-    }
-    ];
-  }
-
-  exportPdf() {
-    /* import("jspdf").then(jsPDF => {
-      import("jspdf-autotable").then(x => {
-        const doc = new jsPDF.default();
-        doc.autoTable(this.exportColumns, this.customers);
-        doc.save('customers.pdf');
-      })
-    }) */
+      }]
+    }];
   }
 
   exportExcel() {
@@ -163,7 +143,7 @@ export class TableDataComponent implements OnInit {
       accept: () => {
         this.customers = this.customers.filter(val => val.id !== customer.id);
         console.log(this.customers);
-        
+
         this.customer = {};
         this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Customer Deleted', life: 3000 });
       }
