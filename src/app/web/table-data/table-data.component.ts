@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ConfirmationService, MenuItem, MessageService, PrimeNGConfig } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Data } from 'src/app/configs/data-table/data';
 import { CustomerService } from 'src/app/core/services/customer.service';
-import { ICustomer, IRepresentative, IStatus } from 'src/app/shared/models/data-table.model';
+import { ICountry, ICustomer, IRepresentative, IStatus } from 'src/app/shared/models/data-table.model';
 
 @Component({
   selector: 'app-table-data',
@@ -21,6 +22,7 @@ export class TableDataComponent implements OnInit {
 
   cols: any[];
   exportColumns: any[];
+  countries: ICountry[];
   _selectedColumns: ICustomer[];
 
   statuses: IStatus[] = Data.Statuses;
@@ -29,20 +31,27 @@ export class TableDataComponent implements OnInit {
   @ViewChild('dt') table: Table;
   customer: ICustomer;
   loading: boolean;
+  submitted: boolean;
+  customerDialog: boolean;
   exportName = "customers"
 
   constructor(private _customerService: CustomerService,
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService,
     private _primengConfig: PrimeNGConfig,
-    private _cdr: ChangeDetectorRef) { }
+    private _cdr: ChangeDetectorRef,
+    private _fb: FormBuilder) { }
 
-  ngOnInit(): void {
-    this._customerService.onGetAllCustomer().subscribe(result => {
+  async ngOnInit() {
+    this._customerService.onGetAllCustomers().subscribe(result => {
       this.customers = result;
     })
 
-    this.cols = [
+    this._customerService.onGetCountries().subscribe(result => {
+      this.countries = result
+    })
+
+    /* this.cols = [
       { field: 'name', header: 'Name' },
       { field: 'country.name', header: 'Country' },
       { field: 'representative.name', header: 'Agent' },
@@ -52,26 +61,23 @@ export class TableDataComponent implements OnInit {
       { field: 'config', header: 'Actions' },
     ];
 
-    this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field }));
+    this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field })); */
 
     this.buttonExportFiles();
   }
 
-  @Input() get selectedColumns(): any[] {
+  /* @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }
 
   set selectedColumns(val: any[]) {
     this._selectedColumns = this.cols.filter(col => val.includes(col));
-  }
+  } */
+
   ngAfterViewInit() {
     // For lazy ding
     // NG0100: ExpressionChangedAfterItHasBeenCheckedError
     this._cdr.detectChanges();
-  }
-
-  selectCustomer(customer: ICustomer) {
-    /* this._messageService.add({severity:'info', summary:'Customer Selected', detail: customer.name}); */
   }
 
   /* 
@@ -132,25 +138,24 @@ export class TableDataComponent implements OnInit {
   */
 
   editCustomer(customer: ICustomer) {
-
+    this.customer = { ...customer };
+    this.customerDialog = true;
   }
 
-  deleteCustomer(customer: ICustomer) {
+  async deleteCustomer(customer: ICustomer) {
     this._confirmationService.confirm({
       message: 'Are you sure you want to delete ' + customer.name + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.customers = this.customers.filter(val => val.id !== customer.id);
-        console.log(this.customers);
-
         this.customer = {};
         this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Customer Deleted', life: 3000 });
       }
     });
   }
 
-  deleteMultipleCustomers() {
+  async deleteMultipleCustomers() {
     this._confirmationService.confirm({
       message: 'Are you sure you want to delete the selected customers?',
       header: 'Confirm',
@@ -161,5 +166,38 @@ export class TableDataComponent implements OnInit {
         this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Selected Customers Deleted', life: 3000 });
       }
     });
+  }
+
+  hideDialog() {
+    this.customerDialog = false;
+    this.submitted = false;
+  }
+
+  async saveCustomer(customer: ICustomer) {
+    this.submitted = true;
+
+    if (this.customer.name.trim()) {
+      {
+        if (this.customer.id) {
+          this.customers[this.findIndexById(customer.id)] = this.customer;
+          this._messageService.add({ severity: 'info', summary: 'Successful', detail: 'Customer Updated', life: 3000 });
+        }
+
+        this.customers = [...this.customers];
+        this.customerDialog = false;
+        this.customer = {};
+      }
+    }
+  }
+
+  findIndexById(id: number): number {
+    let index = -1;
+    for (let i = 0; i < this.customers.length; i++) {
+      if (this.customers[i].id === id) {
+        index = i;
+        break;
+      }
+    }
+    return index;
   }
 }
