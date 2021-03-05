@@ -15,9 +15,10 @@ import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableDataRoutingModule } from './table-data-routing.module';
 import { TableDataComponent } from './table-data.component';
+import { ToolbarModule } from 'primeng/toolbar';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { TableDataComponent } from './table-data.component';
     MultiSelectModule,
     MenuModule,
     ConfirmDialogModule,
-    TableDataRoutingModule
+    TableDataRoutingModule,
+    ToolbarModule
   ]
 })
 export class TableDataModule { }
