@@ -19,6 +19,7 @@ export class TableDataComponent implements OnInit {
   selectedCustomers: ICustomer[];
   items: MenuItem[];
 
+  cols: any[];
   exportColumns: any[];
   countries: ICountry[];
 
@@ -46,6 +47,17 @@ export class TableDataComponent implements OnInit {
     this._customerService.onGetCountries().subscribe(result => {
       this.countries = result
     })
+
+    this.cols = [
+      { field: 'name', header: 'Name' },
+      { field: 'country.name', header: 'Country' },
+      { field: 'representative.name', header: 'Agent' },
+      { field: 'date', header: 'Date' },
+      { field: 'status', header: 'Status' },
+      { field: 'activity', header: 'Activity' },
+    ];
+
+    this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field }));
 
     this.buttonExportFiles();
   }
