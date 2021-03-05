@@ -149,4 +149,17 @@ export class TableDataComponent implements OnInit {
       }
     });
   }
+
+  deleteMultipleCustomers() {
+    this._confirmationService.confirm({
+      message: 'Are you sure you want to delete the selected customers?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.customers = this.customers.filter(val => !this.selectedCustomers.includes(val));
+        this.selectedCustomers = null;
+        this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Selected Customers Deleted', life: 3000 });
+      }
+    });
+  }
 }
