@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ConfirmationService, MenuItem, MessageService, PrimeNGConfig } from 'primeng/api';
 import { Table } from 'primeng/table';
@@ -20,10 +20,8 @@ export class TableDataComponent implements OnInit {
   selectedCustomers: ICustomer[];
   items: MenuItem[];
 
-  cols: any[];
   exportColumns: any[];
   countries: ICountry[];
-  _selectedColumns: ICustomer[];
 
   statuses: IStatus[] = Data.Statuses;
   representatives: IRepresentative[] = Data.Representatives;
@@ -39,8 +37,7 @@ export class TableDataComponent implements OnInit {
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService,
     private _primengConfig: PrimeNGConfig,
-    private _cdr: ChangeDetectorRef,
-    private _fb: FormBuilder) { }
+    private _cdr: ChangeDetectorRef) { }
 
   async ngOnInit() {
     this._customerService.onGetAllCustomers().subscribe(result => {
@@ -51,33 +48,15 @@ export class TableDataComponent implements OnInit {
       this.countries = result
     })
 
-    /* this.cols = [
-      { field: 'name', header: 'Name' },
-      { field: 'country.name', header: 'Country' },
-      { field: 'representative.name', header: 'Agent' },
-      { field: 'date', header: 'Date' },
-      { field: 'status', header: 'Status' },
-      { field: 'activity', header: 'Activity' },
-      { field: 'config', header: 'Actions' },
-    ];
-
-    this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field })); */
-
     this.buttonExportFiles();
   }
-
-  /* @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-
-  set selectedColumns(val: any[]) {
-    this._selectedColumns = this.cols.filter(col => val.includes(col));
-  } */
 
   ngAfterViewInit() {
     // For lazy ding
     // NG0100: ExpressionChangedAfterItHasBeenCheckedError
     this._cdr.detectChanges();
+
+    console.log(this.table);
   }
 
   /* 
@@ -179,7 +158,9 @@ export class TableDataComponent implements OnInit {
     if (this.customer.name.trim()) {
       {
         if (this.customer.id) {
-          this.customers[this.findIndexById(customer.id)] = this.customer;
+          this.customers[this.findIndexById(customer.id)] = this.customer; 
+          console.log(this.customer);
+          
           this._messageService.add({ severity: 'info', summary: 'Successful', detail: 'Customer Updated', life: 3000 });
         }
 

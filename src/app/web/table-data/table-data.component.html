@@ -17,10 +17,9 @@
     </ng-template>
 </p-toolbar>
 
-<p-table id="data-table" #dt [value]="customers" [columns]="cols" dataKey="id" [rows]="10"
-    [showCurrentPageReport]="true" [responsive]="true" [autoLayout]="true" [rowsPerPageOptions]="[5,10,25,50]"
-    [loading]="loading" styleClass="p-datatable-customers" [paginator]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+<p-table #dt [value]="customers" dataKey="id" [rows]="10" [showCurrentPageReport]="true" [responsive]="true"
+    [autoLayout]="true" [rowsPerPageOptions]="[5,10,25,50]" [loading]="loading" styleClass="p-datatable-customers"
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [globalFilterFields]="['name','country.name','representative.name','status']" sortField="date" [sortOrder]="-1"
     styleClass="p-datatable-customers" [exportFilename]="exportName" selectionMode="multiple"
     [(selection)]="selectedCustomers">
@@ -32,8 +31,8 @@
                     <h4 class="p-text-uppercase">List of Customers</h4>
                 </div>
 
-                <div class="p-d-flex p-ai-center">
-                    <span class="p-input-icon-left p-ml-auto">
+                <div class="p-d-flex p-ai-center p-ml-auto">
+                    <span class="p-input-icon-left p-ml-2">
                         <i class="pi pi-search"></i>
                         <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
                             placeholder="Search keyword" />
@@ -43,7 +42,7 @@
         </div>
     </ng-template>
 
-    <ng-template pTemplate="header">
+    <ng-template pTemplate="header" let-columns>
         <tr>
             <th></th>
             <th pSortableColumn="name">
@@ -126,8 +125,9 @@
                 {{customer.name}}
             </td>
             <td>
-                <img src="../../../assets/flag_placeholder.png" [class]="'p-mr-2 flag flag-' + customer.country.code"
-                    width="30">{{customer.country.name}}
+                <img src="../../../assets/flag_placeholder.png"
+                    [class]="'p-mr-2 flag flag-' + customer.country.code.toLowerCase()" width="30">
+                <span>{{customer.country.name}}</span>
             </td>
             <td class="p-d-flex p-ai-center">
                 <p-avatar icon="pi pi-user" styleClass="p-mr-2" shape="circle"></p-avatar>
@@ -160,14 +160,48 @@
 </p-table>
 
 <!-- Dialog -->
-<p-dialog [(visible)]="customerDialog" [style]="{width: '450px', overflow: 'auto'}" header="Customer Details" [modal]="true"
-    styleClass="p-fluid" [dismissableMask]="true">
+<p-dialog [(visible)]="customerDialog" [style]="{width: '500px', overflow: 'auto'}" header="Customer Details"
+    [modal]="true" styleClass="p-fluid" [dismissableMask]="true">
     <ng-template pTemplate="content">
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="country">Country</label>
+                <p-dropdown [options]="countries" [(ngModel)]="customer.country" optionLabel="name" [filter]="true"
+                    filterBy="name" [showClear]="true" placeholder="Select a Country">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="country-item country-item-value p-d-flex p-ai-center" *ngIf="customer.country">
+                            <img src="../../../assets/flag_placeholder.png"
+                                [class]="'p-mr-2 flag flag-' + customer.country.code.toLowerCase()" width="30" />
+                            <div>{{customer.country.name}}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-country pTemplate="item">
+                        <div class="country-item p-d-flex p-ai-center">
+                            <img src="../../../assets/flag_placeholder.png"
+                                [class]="'p-mr-2 flag flag-' + country.code.toLowerCase()" width="30" />
+                            <div>{{country.name}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                <small class="p-error" *ngIf="submitted && !customer.country.name">Country is required.</small>
+            </div>
+
+            <div class="p-field p-col">
+                <label for="representative">Agent</label>
+                <!-- <p-dropdown [(ngModel)]="customer.representative" inputId="representative" [options]="representatives"
+                    placeholder="Select an Agent">
+                    <ng-template let-option pTemplate="item">
+                        <span>{{option.name}}</span>
+                    </ng-template>
+                </p-dropdown> -->
+            </div>
+        </div>
+
         <div class="p-formgrid p-grid">
             <div class="p-field p-col">
                 <label for="status">Status</label>
                 <p-dropdown [(ngModel)]="customer.status" inputId="status" [options]="statuses"
-                    placeholder="Select a status">
+                    placeholder="Select a Status">
                     <ng-template let-option pTemplate="item">
                         <span
                             [class]="'p-py-1 p-px-2 p-text-bold p-text-uppercase customer-badge status-' + option.value">{{option.value}}</span>
@@ -188,35 +222,6 @@
             <input type="text" pInputText id="name" [(ngModel)]="customer.name" required />
             <small class="p-error" *ngIf="submitted && !customer.name">Name is required.</small>
         </div>
-
-        <!--         <div class="p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="name">Country</label>
-                <p-dropdown [options]="countries" [(ngModel)]="customer.country" optionLabel="country" [filter]="true"
-                    filterBy="country" [showClear]="true" placeholder="Select a Country">
-                    <ng-template pTemplate="selectedItem">
-                        <div class="country-item country-item-value" *ngIf="customer.country">
-                            <div>{{customer.country.name}}</div>
-                        </div>
-                    </ng-template>
-                    <ng-template let-country pTemplate="item">
-                        <img src="../../../assets/flag_placeholder.png"
-                            [class]="'p-mr-2 flag flag-' + country.code | lowercase" width="30">{{country.name}}
-                    </ng-template>
-                </p-dropdown>
-                <small class="p-error" *ngIf="submitted && !customer.country.name">Country is required.</small>
-            </div>
-    
-            <div class="p-field p-col">
-                <label for="representative">Agent</label>
-                <p-dropdown [(ngModel)]="customer.representative.name" inputId="representative" [options]="representatives"
-                    placeholder="Select an agent">
-                    <ng-template let-option pTemplate="item">
-                        <span>{{option.name}}</span>
-                    </ng-template>
-                </p-dropdown>
-            </div>
-        </div> -->
     </ng-template>
 
     <ng-template pTemplate="footer">
