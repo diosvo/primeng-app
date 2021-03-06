@@ -216,7 +216,7 @@
 
             <div class="p-field p-col">
                 <label for="activity" class="f-14">Activity (%)</label>
-                <input type="text" pInputText id="activity" [(ngModel)]="customer.activity" required />
+                <input percentage pInputText id="activity" [(ngModel)]="customer.activity" required />
                 <small class="p-error" *ngIf="submitted && !customer.activity">Activity is required.</small>
             </div>
         </div>
@@ -227,11 +227,6 @@
                 <input type="text" pInputText id="name" [(ngModel)]="customer.name" required />
                 <small class="p-error" *ngIf="submitted && !customer.name">Name is required.</small>
             </div>
-
-            <!-- <div class="p-field p-col">
-                <label for="date" class="f-14">Date</label>
-                <p-calendar [(ngModel)]="customer.date" [touchUI]="true" ></p-calendar>
-            </div> -->
         </div>
     </ng-template>
 

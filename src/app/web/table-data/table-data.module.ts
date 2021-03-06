@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
@@ -17,6 +18,8 @@ import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
+
+import { SharedDirectivesModule } from 'src/app/shared/directives/shared-directives.module';
 import { TableDataRoutingModule } from './table-data-routing.module';
 import { TableDataComponent } from './table-data.component';
 @NgModule({
@@ -43,6 +46,8 @@ import { TableDataComponent } from './table-data.component';
     MenuModule,
     ConfirmDialogModule,
     ToolbarModule,
+
+    SharedDirectivesModule,
     TableDataRoutingModule,
   ]
 })

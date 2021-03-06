@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
+
 import { Data } from 'src/app/configs/data-table/data';
 import { CustomerService } from 'src/app/core/services/customer.service';
 import { ICountry, ICustomer, IRepresentative, IStatus } from 'src/app/shared/models/data-table.model';
@@ -56,10 +58,11 @@ export class TableDataComponent implements OnInit {
       { field: 'status', header: 'Status' },
       { field: 'activity', header: 'Activity' },
     ];
-
     this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field }));
-
     this.buttonExportFiles();
+
+    console.log(this.selectedCustomers);
+    
   }
 
   ngAfterViewInit() {
