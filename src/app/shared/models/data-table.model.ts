@@ -23,3 +23,8 @@ export interface IRepresentative {
     name?: string;
     image?: string;
 }
+
+export interface ITableColumn {
+    field?: string;
+    header?: string;
+}
