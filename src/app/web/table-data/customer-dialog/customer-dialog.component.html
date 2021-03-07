@@ -1,0 +1,76 @@
+<p-dialog [(visible)]="customerDialog" [style]="{width: '500px', overflow: 'auto'}" [header]="dialogTitle"
+    [modal]="true" styleClass="p-fluid" [dismissableMask]="true">
+    <ng-template pTemplate="content">
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="country" class="f-14">Country</label>
+                <p-dropdown [options]="countries" [(ngModel)]="customer.country" optionLabel="name" [filter]="true"
+                    filterBy="name" [showClear]="true" placeholder="Select a Country">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="country-item country-item-value p-d-flex p-ai-center" *ngIf="customer.country">
+                            <img src="../../../assets/flag_placeholder.png"
+                                [class]="'p-mr-2 flag flag-' + customer.country.code.toLowerCase()" width="30" />
+                            <div>{{customer.country.name}}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-country pTemplate="item">
+                        <div class="country-item p-d-flex p-ai-center">
+                            <img src="../../../assets/flag_placeholder.png"
+                                [class]="'p-mr-2 flag flag-' + country.code.toLowerCase()" width="30" />
+                            <div>{{country.name}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                <small class="p-error" *ngIf="submitted && !customer.country.name">Country is required.</small>
+            </div>
+
+            <div class="p-field p-col">
+                <label for="representative" class="f-14">Agent</label>
+                <p-dropdown [options]="representatives" [(ngModel)]="customer.representative" optionLabel="name"
+                    [filter]="true" filterBy="name" [showClear]="true" placeholder="Select an Agent">
+                    <ng-template pTemplate="selectedItem">
+                        <div>{{customer.representative.name}}</div>
+                    </ng-template>
+                    <ng-template let-item pTemplate="item">
+                        <div>{{item.name}}</div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="status" class="f-14">Status</label>
+                <p-dropdown [(ngModel)]="customer.status" inputId="status" [options]="statuses"
+                    placeholder="Select a Status">
+                    <ng-template let-option pTemplate="item">
+                        <span
+                            [class]="'p-py-1 p-px-2 p-text-bold p-text-uppercase customer-badge status-' + option.value">{{option.value}}</span>
+                    </ng-template>
+                </p-dropdown>
+                <small class="p-error" *ngIf="submitted && !customer.status">Status is required.</small>
+            </div>
+
+            <div class="p-field p-col">
+                <label for="activity" class="f-14">Activity (%)</label>
+                <input percentage pInputText id="activity" [(ngModel)]="customer.activity" required />
+                <small class="p-error" *ngIf="submitted && !customer.activity">Activity is required.</small>
+            </div>
+        </div>
+
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="name" class="f-14">Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="customer.name" required />
+                <small class="p-error" *ngIf="submitted && !customer.name">Name is required.</small>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-raised p-button-text p-button-danger"
+            (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-raised p-button-text" type="submit"
+            (click)="saveCustomer(customer)"></button>
+    </ng-template>
+</p-dialog>

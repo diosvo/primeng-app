@@ -1,0 +1,141 @@
+<p-table #dt [value]="customers" [columns]="cols" dataKey="id" [rows]="10" [showCurrentPageReport]="true" [responsive]="true"
+    [autoLayout]="true" [rowsPerPageOptions]="[5,10,25,50]" [loading]="loading" styleClass="p-datatable-customers"
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['name','country.name','representative.name','status']" sortField="date" [sortOrder]="1"
+    styleClass="p-datatable-customers" [exportFilename]="exportName" selectionMode="multiple"
+    [(selection)]="selectedCustomers">
+
+    <ng-template pTemplate="caption">
+        <div>
+            <div class="table-header p-d-flex p-jc-between p-ai-center">
+                <div>
+                    <h4 class="p-text-uppercase">List of Customers</h4>
+                </div>
+
+                <div class="p-d-flex p-ai-center p-ml-auto">
+                    <span class="p-input-icon-left p-ml-2">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                            placeholder="Search keyword" />
+                    </span>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th></th>
+            <th pSortableColumn="name">
+                Name
+                <p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="country.name">
+                Country
+                <p-sortIcon field="country.name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="representative.name">
+                Agent
+                <p-sortIcon field="representative.name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="date">
+                Date
+                <p-sortIcon field="date"></p-sortIcon>
+            </th>
+            <th pSortableColumn="status">
+                Status
+                <p-sortIcon field="status"></p-sortIcon>
+            </th>
+            <th pSortableColumn="activity">
+                Activity
+                <p-sortIcon field="status"></p-sortIcon>
+            </th>
+            <th class="p-text-center">Actions</th>
+        </tr>
+
+        <tr>
+            <th [style]="{width: '30px'}">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th [style]="{maxWidth: '150px'}">
+                <p-columnFilter matchMode="contains" type="text" field="name"></p-columnFilter>
+            </th>
+            <th [style]="{maxWidth: '150px'}">
+                <p-columnFilter matchMode="contains" type="text" field="country.name"></p-columnFilter>
+            </th>
+            <th [style]="{maxWidth: '100px'}">
+                <p-columnFilter field="representative" matchMode="in" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-multiSelect [ngModel]="value" [options]="representatives" placeholder="Any"
+                            (onChange)="filter($event.value)" optionLabel="name">
+                            <ng-template let-option pTemplate="item">
+                                <div class="p-multiselect-representative-option">
+                                    <span class="p-ml-1">{{option.name}}</span>
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+            <th [style]="{width: '250px'}">
+                <p-columnFilter class="p-ml-auto" type="date" field="date"></p-columnFilter>
+            </th>
+            <th [style]="{width: '200px'}">
+                <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)"
+                            placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span
+                                    [class]="'p-py-1 p-px-2 p-text-bold p-text-uppercase customer-badge status-' + option.value">{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+            <th colspan="2"></th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-customer>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="customer"></p-tableCheckbox>
+            </td>
+            <td>
+                {{customer.name}}
+            </td>
+            <td>
+                <img src="../../../assets/flag_placeholder.png"
+                    [class]="'p-mr-2 flag flag-' + customer.country.code.toLowerCase()" width="30">
+                <span>{{customer.country.name}}</span>
+            </td>
+            <td class="p-d-flex p-ai-center">
+                <p-avatar icon="pi pi-user" styleClass="p-mr-2" shape="circle"></p-avatar>
+                <span>{{customer.representative.name}}</span>
+            </td>
+            <td>{{customer.date | date: 'MM/dd/yyyy'}}</td>
+            <td>
+                <span
+                    [class]="'p-py-1 p-px-2 p-text-bold p-text-uppercase customer-badge status-' + customer.status">{{customer.status}}</span>
+            </td>
+            <td>
+                <p-progressBar [value]="customer.activity" [showValue]="false" [pTooltip]="customer.activity + '%'"
+                    tooltipPosition="top"></p-progressBar>
+            </td>
+            <td class="p-text-center">
+                <button pButton pRipple icon="pi pi-pencil"
+                    class="p-button-rounded p-button-text p-button-success p-mr-2"
+                    (click)="editCustomer(customer)"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"
+                    (click)="deleteCustomer(customer)"></button>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td class="p-text-center p-py-2" [attr.colspan]="customers.length">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>

@@ -1,11 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-
 import { Data } from 'src/app/configs/data-table/data';
 import { CustomerService } from 'src/app/core/services/customer.service';
-import { ICountry, ICustomer, IRepresentative, IStatus } from 'src/app/shared/models/data-table.model';
+import { ICountry, ICustomer, IRepresentative, IStatus, ITableColumn } from 'src/app/shared/models/data-table.model';
 
 @Component({
   selector: 'app-table-data',
@@ -21,20 +19,19 @@ export class TableDataComponent implements OnInit {
   selectedCustomers: ICustomer[];
   items: MenuItem[];
 
-  cols: any[];
+  cols: ITableColumn[];
   exportColumns: any[];
   countries: ICountry[];
-
   statuses: IStatus[] = Data.Statuses;
   representatives: IRepresentative[] = Data.Representatives;
 
   @ViewChild('dt') table: Table;
   customer: ICustomer;
-  loading: boolean;
   submitted: boolean;
+  loading: boolean;
   customerDialog: boolean;
   dialogTitle: string;
-  exportName = "customers";
+  exportName: string = "customers";
 
   constructor(private _customerService: CustomerService,
     private _messageService: MessageService,
@@ -42,7 +39,7 @@ export class TableDataComponent implements OnInit {
     private _cdr: ChangeDetectorRef) { }
 
   async ngOnInit() {
-    this._customerService.onGetAllCustomers().subscribe(result => {
+    this._customerService.getAllCustomers().subscribe(result => {
       this.customers = result;
     })
 
@@ -60,9 +57,6 @@ export class TableDataComponent implements OnInit {
     ];
     this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field }));
     this.buttonExportFiles();
-
-    console.log(this.selectedCustomers);
-    
   }
 
   ngAfterViewInit() {
@@ -155,7 +149,6 @@ export class TableDataComponent implements OnInit {
           this.customers.push(this.customer);
           this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Customer Created', life: 3000 });
         }
-
         this.customers = [...this.customers];
         this.customerDialog = false;
         this.customer = {};
@@ -206,7 +199,7 @@ export class TableDataComponent implements OnInit {
   }
 
   private createId(): number {
-    let id: number = this.customers.length + 1;
+    let id = this.customers.length + 1;
     return id;
   }
 }

@@ -18,9 +18,10 @@
 </p-toolbar>
 
 <!-- Table -->
-<p-table #dt [value]="customers" [columns]="cols" dataKey="id" [rows]="10" [showCurrentPageReport]="true" [responsive]="true"
-    [autoLayout]="true" [rowsPerPageOptions]="[5,10,25,50]" [loading]="loading" styleClass="p-datatable-customers"
-    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+<p-table #dt [value]="customers" [columns]="cols" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+    [responsive]="true" [autoLayout]="true" [rowsPerPageOptions]="[5,10,25,50]" [loading]="loading"
+    styleClass="p-datatable-customers" [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [globalFilterFields]="['name','country.name','representative.name','status']" sortField="date" [sortOrder]="1"
     styleClass="p-datatable-customers" [exportFilename]="exportName" selectionMode="multiple"
     [(selection)]="selectedCustomers">
@@ -247,3 +248,7 @@
             label="Yes" (click)="cd.accept()"></button>
     </p-footer>
 </p-confirmDialog>
+
+<!-- <app-table-main [customers]="customers" [selectedCustomers]="selectedCustomers" [statuses]="statuses"
+    [representatives]="representatives" [loading]="loading" [exportName]="exportName" (edited)="editCustomer($event)"
+    (deleted)="deleteCustomer($event)"></app-table-main> -->
