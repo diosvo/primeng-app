@@ -39,9 +39,7 @@ export class TableDataComponent implements OnInit {
     private _cdr: ChangeDetectorRef) { }
 
   async ngOnInit() {
-    this._customerService.getAllCustomers().subscribe(result => {
-      this.customers = result;
-    })
+    this.loadCustomers();
 
     this._customerService.onGetCountries().subscribe(result => {
       this.countries = result
@@ -57,6 +55,12 @@ export class TableDataComponent implements OnInit {
     ];
     this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field }));
     this.buttonExportFiles();
+  }
+
+  loadCustomers() {
+    this._customerService.getAllCustomers().subscribe(result => {
+      this.customers = result;
+    })
   }
 
   ngAfterViewInit() {
@@ -144,12 +148,11 @@ export class TableDataComponent implements OnInit {
           this.customers[this.findIndexById(customer.id)] = this.customer;
           this._messageService.add({ severity: 'info', summary: 'Successful', detail: 'Customer Updated', life: 3000 });
         } else {
-          this.customer.id = this.createId();
-          this.customer.date = this.getCurrentDay()
-          this.customers.push(this.customer);
+          this._customerService.createNewCustomer(customer).subscribe(result => {
+            this.loadCustomers();
+          })
           this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Customer Created', life: 3000 });
         }
-        this.customers = [...this.customers];
         this.customerDialog = false;
         this.customer = {};
       }
