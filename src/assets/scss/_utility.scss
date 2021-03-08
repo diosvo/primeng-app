@@ -63,6 +63,11 @@ input {
 
 // Override PrimeNg
 
-.p-datatable .p-sortable-column:focus, .p-link:focus {
+.p-datatable .p-sortable-column:focus,
+.p-link:focus {
     box-shadow: none !important;
+}
+
+.p-datatable-wrapper {
+    overflow: visible !important;
 }

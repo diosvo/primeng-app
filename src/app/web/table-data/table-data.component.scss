@@ -6,7 +6,6 @@
 }
 
 ::ng-deep {
-
     .p-datatable-wrapper {
         @extend %defaultFS;
     }
@@ -45,7 +44,7 @@
     }
 
     .p-calendar .p-datepicker {
-        width: 20vw;
+        width: 22vw;
     }
 
     .p-button {
@@ -98,5 +97,5 @@
 }
 
 .no-customer {
-    padding: 1rem!important;
+    padding: 1rem !important;
 }
