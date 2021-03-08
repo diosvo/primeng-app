@@ -9,8 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "json:server": "json-server --watch mocks/data.json",
-    "start:proxy": "ng serve --proxy-config proxy.conf.json",
-    "start:proxy:json:server": "concurrently"
+    "start:proxy": "ng serve --proxy-config proxy.conf.json"
   },
   "private": true,
   "dependencies": {
@@ -23,7 +22,6 @@
     "@angular/platform-browser": "^11.2.3",
     "@angular/platform-browser-dynamic": "~11.2.1",
     "@angular/router": "^11.2.4",
-    "concurrently": "^6.0.0",
     "file-saver": "^2.0.5",
     "json-server": "^0.16.3",
     "primeflex": "^2.0.0",

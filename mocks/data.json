@@ -25,39 +25,24 @@
         "image": "amyelsner.png"
       },
       "activity": "100",
-      "status": "new",
+      "status": "qualified",
       "name": "Võ Thị Mỹ Nhung",
       "date": "03/08/2021",
       "id": 3
     },
     {
       "country": {
-        "name": "Albania",
-        "code": "AL"
+        "name": "Armenia",
+        "code": "AM"
       },
       "representative": {
-        "name": "Amy Elsner",
-        "image": "amyelsner.png"
+        "name": "Anna Fali",
+        "image": "annafali.png"
       },
-      "status": "qualified",
-      "activity": "55",
-      "name": "Thu Phung",
-      "date": "03/08/2021",
-      "id": 4
-    },
-    {
-      "country": {
-        "name": "Åland Islands",
-        "code": "AX"
-      },
-      "status": "new",
-      "representative": {
-        "name": "Amy Elsner",
-        "image": "amyelsner.png"
-      },
-      "activity": "55",
-      "name": "Delmy Ahle",
-      "date": "2021-03-08T04:06:27.786Z",
+      "status": "negotiation",
+      "activity": "12",
+      "name": "ABC D",
+      "date": "2021-03-08T08:33:49.124Z",
       "id": 5
     }
   ],

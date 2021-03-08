@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-
 import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
 
 @Component({
@@ -10,16 +9,16 @@ import { BudgetItemModel } from 'src/app/shared/models/budget-item.model';
 })
 export class EditItemComponent implements OnInit {
 
-  @Input() item: BudgetItemModel
+  @Input() item: BudgetItemModel;
 
   constructor(public ref: DynamicDialogRef,
-    public config: DynamicDialogConfig) { }
+              public config: DynamicDialogConfig) { }
 
   ngOnInit(): void {
-    this.item = this.config.data
+    this.item = this.config.data;
   }
 
-  onSubmit(updateItem: BudgetItemModel) {
+  onSubmit(updateItem: BudgetItemModel): void {
     this.ref.close(updateItem);
   }
 }

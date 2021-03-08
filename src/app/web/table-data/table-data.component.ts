@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Data } from 'src/app/configs/data-table/data';
@@ -13,7 +13,7 @@ import { ICountry, ICustomer, IRepresentative, IStatus, ITableColumn } from 'src
   providers: [MessageService, ConfirmationService]
 })
 
-export class TableDataComponent implements OnInit {
+export class TableDataComponent implements OnInit, AfterViewInit {
 
   // Definition
   customers: ICustomer[];
@@ -32,15 +32,15 @@ export class TableDataComponent implements OnInit {
   loading: boolean;
   customerDialog: boolean;
   dialogTitle: string;
-  exportName: string = "customers";
+  exportName = 'customers';
 
-  constructor(private _customerService: CustomerService,
-    private _countriesService: CountriesService,
-    private _messageService: MessageService,
-    private _confirmationService: ConfirmationService,
-    private _cdr: ChangeDetectorRef) { }
+  constructor(private customerService: CustomerService,
+              private countriesService: CountriesService,
+              private messageService: MessageService,
+              private confirmationService: ConfirmationService,
+              private cdr: ChangeDetectorRef) { }
 
-  async ngOnInit() {
+  ngOnInit(): void {
     this.loadCustomers();
     this.loadCountries();
 
@@ -56,29 +56,29 @@ export class TableDataComponent implements OnInit {
     this.buttonExportFiles();
   }
 
-  loadCustomers() {
-    this._customerService.all().subscribe(result => {
+  loadCustomers(): void {
+    this.customerService.all().subscribe(result => {
       this.customers = result;
-    })
+    });
   }
 
-  loadCountries() {
-    this._countriesService.all().subscribe(result => {
+  loadCountries(): void {
+    this.countriesService.all().subscribe(result => {
       this.countries = result;
-    })
+    });
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     // For lazy ding
     // NG0100: ExpressionChangedAfterItHasBeenCheckedError
-    this._cdr.detectChanges();
+    this.cdr.detectChanges();
   }
 
-  /* 
+  /*
   - Export files
   */
 
-  buttonExportFiles() {
+  buttonExportFiles(): void {
     this.items = [{
       label: 'File',
       items: [{
@@ -98,23 +98,23 @@ export class TableDataComponent implements OnInit {
     }];
   }
 
-  exportExcel() {
-    import("xlsx").then(xlsx => {
+  exportExcel(): void {
+    import('xlsx').then(xlsx => {
       const worksheet = xlsx.utils.json_to_sheet(this.customers);
       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-      this.saveAsExcelFile(excelBuffer, "customers");
+      this.saveAsExcelFile(excelBuffer, 'customers');
     });
   }
 
   saveAsExcelFile(buffer: any, fileName: string): void {
-    import("file-saver").then(FileSaver => {
-      let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-      let EXCEL_EXTENSION = '.xlsx';
+    import('file-saver').then(FileSaver => {
+      const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+      const EXCEL_EXTENSION = '.xlsx';
       const data: Blob = new Blob([buffer], {
         type: EXCEL_TYPE
       });
-      FileSaver.saveAs(data, fileName + '_export_' + this.getCurrentDay() + EXCEL_EXTENSION)
+      FileSaver.saveAs(data, fileName + '_export_' + this.getCurrentDay() + EXCEL_EXTENSION);
     });
   }
 
@@ -122,82 +122,77 @@ export class TableDataComponent implements OnInit {
   - Customer functions
   */
 
-  async createNewCustomer() {
-    this.dialogTitle = "Create New Customer"
+  async createNewCustomer(): Promise<void> {
+    this.dialogTitle = 'Create New Customer';
+    console.log(this.customer);
     this.customer = {};
     this.submitted = false;
     this.customerDialog = true;
   }
 
-  editCustomer(customer: ICustomer) {
-    this.dialogTitle = "Update Customer Details"
+  async editCustomer(customer: ICustomer): Promise<void> {
+    this.dialogTitle = 'Update Customer Details';
     this.customer = { ...customer };
     this.customerDialog = true;
   }
 
-  async saveCustomer(customer: ICustomer) {
+  async saveCustomer(customer: ICustomer): Promise<void> {
     this.submitted = true;
 
     if (this.customer.id) {
-      this._customerService.update(customer).subscribe(result => {
+      this.customerService.update(customer).subscribe(result => {
         this.loadCustomers();
-      })
-      this._messageService.add({ severity: 'info', summary: 'Successful', detail: 'Customer Updated', life: 3000 });
+      });
+      this.messageService.add({ severity: 'info', summary: 'Successful', detail: 'Customer Updated', life: 3000 });
     } else {
-      this.customer.date = new Date()
-      this._customerService.create(customer).subscribe(result => {
+      this.customer.date = new Date();
+      this.customerService.create(customer).subscribe(result => {
         this.loadCustomers();
-      })
-      this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Customer Created', life: 3000 });
+      });
+      this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Customer Created', life: 3000 });
     }
     this.customerDialog = false;
     this.customer = {};
   }
 
-  async deleteCustomer(customer: ICustomer) {
-    this._confirmationService.confirm({
+  async deleteCustomer(customer: ICustomer): Promise<void> {
+    this.confirmationService.confirm({
       message: 'Are you sure you want to delete ' + customer.name + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this._customerService.delete(customer).subscribe(result => {
+        this.customerService.delete(customer).subscribe(result => {
           this.loadCustomers();
-        })
+        });
         this.customer = {};
-        this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Customer Deleted', life: 3000 });
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Customer Deleted', life: 3000 });
       }
     });
   }
 
-  async deleteMultipleCustomers() {
-    this._confirmationService.confirm({
+  async deleteMultipleCustomers(): Promise<void> {
+    this.confirmationService.confirm({
       message: 'Are you sure you want to delete the selected customers?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        debugger
-        const payload = this.customers.filter(val => !this.selectedCustomers.includes(val));
-        this.customers = [];
-        this._customerService.multipleDelete(payload).subscribe((result: ICustomer[]) => {
-          this.customers = result;
-        })
-        this.customers = [...payload]
+        this.customers = this.customers.filter(val => !this.selectedCustomers.includes(val));
         this.selectedCustomers = null;
-        this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Selected Customers Deleted', life: 3000 });
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Selected Customers Deleted', life: 3000 });
       }
     });
   }
 
-  hideDialog() {
+  hideDialog(): void {
     this.customerDialog = false;
     this.submitted = false;
   }
 
-  private getCurrentDay() {
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let MM = String(today.getMonth() + 1).padStart(2, '0');
-    let yyyy = today.getFullYear();
+  private getCurrentDay(): string {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const MM = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
 
     return `${MM + '/' + dd + '/' + yyyy}`;
   }
