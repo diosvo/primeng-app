@@ -21,5 +21,4 @@ export class ReuseService {
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
-
 }

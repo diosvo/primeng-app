@@ -25,10 +25,6 @@ export class BudgetComponent implements OnInit {
 
     this.totalBudget += item.amount;
     this._messageService.add({ severity: 'success', summary: 'Success!', detail: 'Item has already added to the list' });
-    /* await [
-      localStorage.setItem('Budget Items', JSON.stringify(this.budgetItems)),
-      localStorage.setItem('Total', JSON.stringify(this.totalBudget))
-    ] */
   }
 
   async deleteItem(item: BudgetItemModel) {
@@ -37,10 +33,6 @@ export class BudgetComponent implements OnInit {
 
     this.totalBudget -= item.amount;
     this._messageService.add({ severity: 'success', summary: 'Success!', detail: 'Item has already deleted from the list' });
-    /* await [
-      localStorage.setItem('Budget Items', JSON.stringify(this.budgetItems)),
-      localStorage.setItem('Total', JSON.stringify(this.totalBudget))
-    ] */
   }
 
   async editItem(updateEvent: UpdateEvent) {
@@ -52,12 +44,4 @@ export class BudgetComponent implements OnInit {
     this.totalBudget -= updateEvent.old.amount
     this.totalBudget += updateEvent.new.amount
   }
-
-  /* get items() {
-    let itemDetail = [
-      JSON.parse(localStorage.getItem("Budget Items") || '[]'),
-      JSON.parse(localStorage.getItem("Total") || '')
-    ]
-    return itemDetail;
-  } */
 }

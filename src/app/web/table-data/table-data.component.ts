@@ -118,15 +118,6 @@ export class TableDataComponent implements OnInit {
     });
   }
 
-  private getCurrentDay() {
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let MM = String(today.getMonth() + 1).padStart(2, '0');
-    let yyyy = today.getFullYear();
-
-    return `${MM + '/' + dd + '/' + yyyy}`;
-  }
-
   /* 
   - Customer functions
   */
@@ -153,7 +144,7 @@ export class TableDataComponent implements OnInit {
       })
       this._messageService.add({ severity: 'info', summary: 'Successful', detail: 'Customer Updated', life: 3000 });
     } else {
-      this.customer.date = this.getCurrentDay()
+      this.customer.date = new Date()
       this._customerService.create(customer).subscribe(result => {
         this.loadCustomers();
       })
@@ -184,7 +175,13 @@ export class TableDataComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.customers = this.customers.filter(val => !this.selectedCustomers.includes(val));
+        debugger
+        const payload = this.customers.filter(val => !this.selectedCustomers.includes(val));
+        this.customers = [];
+        this._customerService.multipleDelete(payload).subscribe((result: ICustomer[]) => {
+          this.customers = result;
+        })
+        this.customers = [...payload]
         this.selectedCustomers = null;
         this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Selected Customers Deleted', life: 3000 });
       }
@@ -194,5 +191,14 @@ export class TableDataComponent implements OnInit {
   hideDialog() {
     this.customerDialog = false;
     this.submitted = false;
+  }
+
+  private getCurrentDay() {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let MM = String(today.getMonth() + 1).padStart(2, '0');
+    let yyyy = today.getFullYear();
+
+    return `${MM + '/' + dd + '/' + yyyy}`;
   }
 }
