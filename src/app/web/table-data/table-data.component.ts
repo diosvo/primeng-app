@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Data } from 'src/app/configs/data-table/data';
+import { CountriesService } from 'src/app/core/services/countries.service';
 import { CustomerService } from 'src/app/core/services/customer.service';
 import { ICountry, ICustomer, IRepresentative, IStatus, ITableColumn } from 'src/app/shared/models/data-table.model';
 
@@ -34,16 +35,14 @@ export class TableDataComponent implements OnInit {
   exportName: string = "customers";
 
   constructor(private _customerService: CustomerService,
+    private _countriesService: CountriesService,
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService,
     private _cdr: ChangeDetectorRef) { }
 
   async ngOnInit() {
     this.loadCustomers();
-
-    this._customerService.onGetCountries().subscribe(result => {
-      this.countries = result
-    })
+    this.loadCountries();
 
     this.cols = [
       { field: 'name', header: 'Name' },
@@ -60,6 +59,12 @@ export class TableDataComponent implements OnInit {
   loadCustomers() {
     this._customerService.all().subscribe(result => {
       this.customers = result;
+    })
+  }
+
+  loadCountries() {
+    this._countriesService.all().subscribe(result => {
+      this.countries = result;
     })
   }
 

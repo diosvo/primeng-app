@@ -1,11 +1,11 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { ReuseService } from './core/services/reuse.service';
 
 @NgModule({
   declarations: [
@@ -14,11 +14,11 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule, 
+    HttpClientModule,
     RouterModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ReuseService],
   bootstrap: [AppComponent]
 })
 
