@@ -1,4 +1,4 @@
-import { ICountry, ICustomer, IRepresentative, IStatus } from "src/app/shared/models/data-table.model";
+import { ICountry, IRepresentative, IStatus } from "src/app/shared/models/data-table.model";
 
 export abstract class Data {
     public static Representatives: IRepresentative[] = [

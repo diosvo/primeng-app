@@ -58,7 +58,7 @@ export class TableDataComponent implements OnInit {
   }
 
   loadCustomers() {
-    this._customerService.getAllCustomers().subscribe(result => {
+    this._customerService.all().subscribe(result => {
       this.customers = result;
     })
   }
@@ -142,21 +142,20 @@ export class TableDataComponent implements OnInit {
   async saveCustomer(customer: ICustomer) {
     this.submitted = true;
 
-    if (this.customer.name.trim()) {
-      {
-        if (this.customer.id) {
-          this.customers[this.findIndexById(customer.id)] = this.customer;
-          this._messageService.add({ severity: 'info', summary: 'Successful', detail: 'Customer Updated', life: 3000 });
-        } else {
-          this._customerService.createNewCustomer(customer).subscribe(result => {
-            this.loadCustomers();
-          })
-          this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Customer Created', life: 3000 });
-        }
-        this.customerDialog = false;
-        this.customer = {};
-      }
+    if (this.customer.id) {
+      this._customerService.update(customer).subscribe(result => {
+        this.loadCustomers();
+      })
+      this._messageService.add({ severity: 'info', summary: 'Successful', detail: 'Customer Updated', life: 3000 });
+    } else {
+      this.customer.date = this.getCurrentDay()
+      this._customerService.create(customer).subscribe(result => {
+        this.loadCustomers();
+      })
+      this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Customer Created', life: 3000 });
     }
+    this.customerDialog = false;
+    this.customer = {};
   }
 
   async deleteCustomer(customer: ICustomer) {
@@ -165,7 +164,9 @@ export class TableDataComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.customers = this.customers.filter(val => val.id !== customer.id);
+        this._customerService.delete(customer).subscribe(result => {
+          this.loadCustomers();
+        })
         this.customer = {};
         this._messageService.add({ severity: 'success', summary: 'Successful', detail: 'Customer Deleted', life: 3000 });
       }
@@ -188,21 +189,5 @@ export class TableDataComponent implements OnInit {
   hideDialog() {
     this.customerDialog = false;
     this.submitted = false;
-  }
-
-  private findIndexById(id: number): number {
-    let index = -1;
-    for (let i = 0; i < this.customers.length; i++) {
-      if (this.customers[i].id === id) {
-        index = i;
-        break;
-      }
-    }
-    return index;
-  }
-
-  private createId(): number {
-    let id = this.customers.length + 1;
-    return id;
   }
 }

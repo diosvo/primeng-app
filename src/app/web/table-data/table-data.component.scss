@@ -1,6 +1,7 @@
 @use '../../../assets/scss/flags.scss';
 
-%defaultFS, .f-14 {
+%defaultFS,
+.f-14 {
     font-size: 14px;
 }
 
@@ -94,4 +95,8 @@
         background-color: #feedaf;
         color           : #8a5340;
     }
+}
+
+.no-customer {
+    padding: 1rem!important;
 }

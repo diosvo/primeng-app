@@ -1,3 +1,19 @@
 {
-  "customers": []
+  "customers": [
+    {
+      "country": {
+        "name": "Albania",
+        "code": "AL"
+      },
+      "representative": {
+        "name": "Asiya Javayant",
+        "image": "asiyajavayant.png"
+      },
+      "activity": "88",
+      "status": "unqualified",
+      "name": "Delmy Ahle",
+      "date": "03/08/2021",
+      "id": 2
+    }
+  ]
 }
