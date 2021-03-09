@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { Observable } from 'rxjs';
 import { Data } from 'src/app/configs/data-table/data';
 import { CountriesService } from 'src/app/core/services/countries.service';
 import { CustomerService } from 'src/app/core/services/customer.service';
@@ -40,9 +41,9 @@ export class TableDataComponent implements OnInit, AfterViewInit {
               private confirmationService: ConfirmationService,
               private cdr: ChangeDetectorRef) { }
 
-  ngOnInit(): void {
-    this.loadCustomers();
-    this.loadCountries();
+  async ngOnInit(): Promise<void> {
+    await this.loadCustomers();
+    await this.loadCountries();
 
     this.cols = [
       { field: 'name', header: 'Name' },
@@ -56,13 +57,13 @@ export class TableDataComponent implements OnInit, AfterViewInit {
     this.buttonExportFiles();
   }
 
-  loadCustomers(): void {
-    this.customerService.all().subscribe(result => {
-      this.customers = result;
+  async loadCustomers(): Promise<void> {
+    this.customerService.all().subscribe({
+      next: (value: ICustomer[]) => this.customers = value
     });
   }
 
-  loadCountries(): void {
+  async loadCountries(): Promise<void> {
     this.countriesService.all().subscribe(result => {
       this.countries = result;
     });
@@ -118,9 +119,7 @@ export class TableDataComponent implements OnInit, AfterViewInit {
     });
   }
 
-  /* 
-  - Customer functions
-  */
+  /* - Customer functions */
 
   async createNewCustomer(): Promise<void> {
     this.dialogTitle = 'Create New Customer';

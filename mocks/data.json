@@ -31,21 +31,6 @@
       "id": 3
     },
     {
-      "country": {
-        "name": "Armenia",
-        "code": "AM"
-      },
-      "representative": {
-        "name": "Anna Fali",
-        "image": "annafali.png"
-      },
-      "status": "negotiation",
-      "activity": "12",
-      "name": "ABC D",
-      "date": "2021-03-08T08:33:49.124Z",
-      "id": 5
-    },
-    {
       "name": "Phùng Thị Kim Thu",
       "country": {
         "name": "Viet Nam",
