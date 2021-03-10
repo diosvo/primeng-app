@@ -57,14 +57,18 @@ export class TableDataComponent implements OnInit, AfterViewInit {
   }
 
   async loadCustomers(): Promise<void> {
-    this.customerService.all().subscribe((result: any) => {
-      this.customers = result.customers;
+    this.customerService.all().subscribe(result => {
+      this.customers = result;
+
+      this.customers.forEach(
+        customer => (customer.date = new Date(customer.date))
+      );
     });
   }
 
   async loadCountries(): Promise<void> {
-    this.countriesService.all().subscribe((result: any) => {
-      this.countries = result.countries;
+    this.countriesService.all().subscribe(result => {
+      this.countries = result;
     });
   }
 
@@ -122,7 +126,6 @@ export class TableDataComponent implements OnInit, AfterViewInit {
 
   async createNewCustomer(): Promise<void> {
     this.dialogTitle = 'Create New Customer';
-    console.log(this.customer);
     this.customer = {};
     this.submitted = false;
     this.customerDialog = true;
@@ -193,6 +196,6 @@ export class TableDataComponent implements OnInit, AfterViewInit {
     const MM = String(today.getMonth() + 1).padStart(2, '0');
     const yyyy = today.getFullYear();
 
-    return `${MM + '/' + dd + '/' + yyyy}`;
+    return `${MM + '-' + dd + '-' + yyyy}`;
   }
 }
