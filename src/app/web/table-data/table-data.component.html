@@ -141,8 +141,8 @@
                     [class]="'p-py-1 p-px-2 p-text-bold p-text-uppercase customer-badge status-' + customer.status">{{customer.status}}</span>
             </td>
             <td>
-                <p-progressBar [value]="customer.activity" [showValue]="false" [pTooltip]="customer.activity + '%'"
-                    tooltipPosition="top"></p-progressBar>
+                <p-progressBar [value]="customer.activity" [showValue]="false"
+                    [pTooltip]="(customer.activity || 0) + '%'" tooltipPosition="top"></p-progressBar>
             </td>
             <td class="p-text-center">
                 <button pButton pRipple icon="pi pi-pencil"

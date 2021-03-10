@@ -1,4 +1,4 @@
-import { IRepresentative, IStatus } from "src/app/shared/models/data-table.model";
+import { IRepresentative, IStatus } from 'src/app/shared/models/data-table.model';
 
 export abstract class Data {
     public static Representatives: IRepresentative[] = [
@@ -12,7 +12,7 @@ export abstract class Data {
         { name: "Onyama Limba", image: 'onyamalimba.png' },
         { name: "Stephen Shaw", image: 'stephenshaw.png' },
         { name: "XuXue Feng", image: 'xuxuefeng.png' }
-    ]
+    ];
 
     public static Statuses: IStatus[] = [
         { label: 'Unqualified', value: 'unqualified' },
@@ -21,5 +21,5 @@ export abstract class Data {
         { label: 'Negotiation', value: 'negotiation' },
         { label: 'Renewal', value: 'renewal' },
         { label: 'Proposal', value: 'proposal' }
-    ]
+    ];
 }

@@ -1,7 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { Observable } from 'rxjs';
 import { Data } from 'src/app/configs/data-table/data';
 import { CountriesService } from 'src/app/core/services/countries.service';
 import { CustomerService } from 'src/app/core/services/customer.service';
@@ -58,14 +57,14 @@ export class TableDataComponent implements OnInit, AfterViewInit {
   }
 
   async loadCustomers(): Promise<void> {
-    this.customerService.all().subscribe({
-      next: (value: ICustomer[]) => this.customers = value
+    this.customerService.all().subscribe((result: any) => {
+      this.customers = result.customers;
     });
   }
 
   async loadCountries(): Promise<void> {
-    this.countriesService.all().subscribe(result => {
-      this.countries = result;
+    this.countriesService.all().subscribe((result: any) => {
+      this.countries = result.countries;
     });
   }
 
@@ -139,8 +138,9 @@ export class TableDataComponent implements OnInit, AfterViewInit {
     this.submitted = true;
 
     if (this.customer.id) {
-      this.customerService.update(customer).subscribe(result => {
-        this.loadCustomers();
+      // debugger
+      this.customerService.update(customer).subscribe({
+        next: () => this.loadCustomers()
       });
       this.messageService.add({ severity: 'info', summary: 'Successful', detail: 'Customer Updated', life: 3000 });
     } else {

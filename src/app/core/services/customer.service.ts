@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ICustomer } from 'src/app/shared/models/data-table.model';
 import { environment } from 'src/environments/environment';
+import { ExtractData } from './extract-data';
 import { ReuseService } from './reuse.service';
 
 @Injectable({
@@ -14,10 +15,10 @@ export class CustomerService {
   private CUSTOMERS_URL = environment.BASE_URL + 'customers';
 
   constructor(private http: HttpClient,
-              public reuseService: ReuseService) { }
+              private reuseService: ReuseService) { }
 
   all(): Observable<ICustomer[]> {
-    return this.http.get<ICustomer[]>(this.CUSTOMERS_URL)
+    return this.http.get<ICustomer[]>(this.CUSTOMERS_URL, ExtractData.httpOptions)
       .pipe(catchError(this.reuseService.handleError));
   }
 
@@ -25,23 +26,23 @@ export class CustomerService {
     return this.http.get<ICustomer[]>(this.getURLByID(customerId));
   }
 
-  create(customer: ICustomer): Observable<ICustomer[]> {
-    return this.http.post<ICustomer[]>(this.CUSTOMERS_URL, customer)
+  create(customer: ICustomer): Observable<ICustomer> {
+    return this.http.post<ICustomer>(this.CUSTOMERS_URL, customer, ExtractData.httpOptions)
       .pipe(catchError(this.reuseService.handleError));
   }
 
-  update(customer: ICustomer): Observable<ICustomer[]> {
-    return this.http.put<ICustomer[]>(this.getURLByID(customer.id), customer)
+  update(customer: ICustomer): Observable<ICustomer> {
+    return this.http.put<ICustomer>(this.getURLByID(customer.id), customer, ExtractData.httpOptions)
       .pipe(catchError(this.reuseService.handleError));
   }
 
-  delete(customer: ICustomer): Observable<ICustomer[]> {
-    return this.http.delete<ICustomer[]>(this.getURLByID(customer.id))
+  delete(customer: ICustomer): Observable<ICustomer> {
+    return this.http.delete<ICustomer>(this.getURLByID(customer.id), ExtractData.httpOptions)
       .pipe(catchError(this.reuseService.handleError));
   }
 
   multipleDelete(customers: ICustomer[]): Observable<ICustomer[]> {
-    return this.http.post<ICustomer[]>(this.CUSTOMERS_URL, customers)
+    return this.http.post<ICustomer[]>(this.CUSTOMERS_URL, customers, ExtractData.httpOptions)
       .pipe(catchError(this.reuseService.handleError));
   }
 

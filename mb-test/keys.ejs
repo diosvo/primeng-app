@@ -1,0 +1,23 @@
+{
+    "predicates": [
+        {
+            "equals": {
+                "method": "GET"
+            }
+        }
+    ],
+    "responses": [
+        {
+            "is": {
+                "statusCode": 200,
+                "headers": {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Credentials": true,
+                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                    "Content-Type": "application/json"
+                },
+                "body": <% include ../mocks/data.json %>
+            }
+        }
+    ]
+}
