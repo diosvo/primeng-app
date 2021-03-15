@@ -1,3 +1,7 @@
-{"message":"[mb:2525] mountebank v2.4.0 now taking orders - point your browser to http://localhost:2525/ for help","level":"info","timestamp":"2021-03-10T09:26:02.344Z"}
-{"message":"[mb:2525] PUT /imposters","level":"info","timestamp":"2021-03-10T09:26:02.375Z"}
-{"message":"[http:4545 proto] Open for business...","level":"info","timestamp":"2021-03-10T09:26:02.411Z"}
+{"message":"[mb:2525] mountebank v2.4.0 now taking orders - point your browser to http://localhost:2525/ for help","level":"info","timestamp":"2021-03-10T10:10:36.499Z"}
+{"message":"[mb:2525] PUT /imposters","level":"info","timestamp":"2021-03-10T10:10:36.529Z"}
+{"message":"[http:4545 proto] Open for business...","level":"info","timestamp":"2021-03-10T10:10:36.558Z"}
+{"message":"[http:4545 proto] ::1:58564 => GET /customers","level":"info","timestamp":"2021-03-10T10:13:40.541Z"}
+{"message":"[http:4545 proto] no predicate match, using default response","level":"info","timestamp":"2021-03-10T10:13:40.668Z"}
+{"message":"[http:4545 proto] ::1:58570 => GET /","level":"info","timestamp":"2021-03-10T10:13:45.593Z"}
+{"message":"[http:4545 proto] no predicate match, using default response","level":"info","timestamp":"2021-03-10T10:13:45.596Z"}

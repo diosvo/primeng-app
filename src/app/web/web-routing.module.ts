@@ -10,6 +10,10 @@ const routes: Routes = [
     path: 'table',
     loadChildren: () => import('./table-data/table-data.module').then(m => m.TableDataModule),
   },
+  {
+    path: 'story-book',
+    loadChildren: () => import('./story-book/story-book.module').then(m => m.StoryBookModule),
+  },
 ];
 
 @NgModule({

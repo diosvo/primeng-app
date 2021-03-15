@@ -1,6 +1,4 @@
-{"message":"[mb:2525] mountebank v2.4.0 now taking orders - point your browser to http://localhost:2525/ for help","level":"info","timestamp":"2021-03-10T09:21:27.322Z"}
-{"message":"[mb:2525] PUT /imposters","level":"info","timestamp":"2021-03-10T09:21:27.356Z"}
-{"message":"[http:4545 proto] Open for business...","level":"info","timestamp":"2021-03-10T09:21:27.386Z"}
-{"message":"[http:4545 proto] ::1:55306 => POST /imposters/3000/customers","level":"info","timestamp":"2021-03-10T09:22:14.758Z"}
-{"message":"[http:4545 proto] ::1:55320 => POST /imposters/3000/customers","level":"info","timestamp":"2021-03-10T09:22:31.266Z"}
-{"message":"[mb:2525] Adios - see you soon?","level":"info","timestamp":"2021-03-10T09:25:52.878Z"}
+{"message":"[mb:2525] mountebank v2.4.0 now taking orders - point your browser to http://localhost:2525/ for help","level":"info","timestamp":"2021-03-10T09:26:02.344Z"}
+{"message":"[mb:2525] PUT /imposters","level":"info","timestamp":"2021-03-10T09:26:02.375Z"}
+{"message":"[http:4545 proto] Open for business...","level":"info","timestamp":"2021-03-10T09:26:02.411Z"}
+{"message":"[mb:2525] Adios - see you soon?","level":"info","timestamp":"2021-03-10T10:10:33.563Z"}
