@@ -1004,5 +1004,10 @@
       "name": "Zimbabwe",
       "code": "ZW"
     }
+  ],
+  "posts": [
+    {
+      "id": 1
+    }
   ]
 }

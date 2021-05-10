@@ -1,30 +1,5 @@
-<!-- <rbn-confirm-dialog [title]="header" [content]="body" (emitConfirm)="onSubmit($event)"></rbn-confirm-dialog> -->
-
-<h4>1. Date range picker</h4>
-<rbn-daterangepicker [fromDate]="fromDate" [toDate]="toDate" [showTime]="showTime"
-    (dateRangeEmitter)="eventDateRangeEmitter($event)"></rbn-daterangepicker>
-
-<h4>2. Search global</h4>
-<rbn-search-global></rbn-search-global>
-
-<h4>3. Dynamic Key Value</h4>
-<rbn-key-value [placeholderTextKey]="hi" [placeholderTextValue]="hello" [keyOption]="keyOption"
-    [valueOption]="valueOption" [isDropdownRequired]="isDropdownRequired" [needFormTag]="needFormTag"
-    [idPrefix]="idPrefix" (emitCloseEvent)="onSubmit($event)" (addRemoveEvent)="eventDateRangeEmitter($event)">
-</rbn-key-value>
-
-<h4>4. Page top</h4>
-<rbn-page-top [pageTop]="pageTop"></rbn-page-top>
-
-<h4>5. Read only form</h4>
-<rbn-read-only-form [json]="json"></rbn-read-only-form>
-
-
-<h4>6. Dynamic Button</h4>
-<rbn-dynamic-button [field]="field"></rbn-dynamic-button>
-
-<h4>7. Service Card</h4>
-<rbn-services-card [inforCard]="info" (evOnClickBtnForward)="forwardToIDH()"></rbn-services-card>
-
-<h4>8. Page Header</h4>
-<rbn-page-header [data]="data" (backButtonAction)=backButtonAction()></rbn-page-header>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input formControlName="indexname" type="text" pInputText placeholder="indexname" />
+    <input formControlName="keyword" type="text" pInputText placeholder="keyword" />
+    <button pButton type="submit" label="Submit" class="p-button-info" (onclick)="onSubmit()"></button>
+</form>
