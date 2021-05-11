@@ -20,7 +20,7 @@ export class BudgetService {
     return budget;
   }
 
-  create(params: any): Observable<any> {
-    return this.http.post(this.URL, `&f_location=${params}`).pipe(map(() => console.log('OK!')));
+  get(params: any): Observable<any> {
+    return this.http.get(`${this.URL}/?f_location=${params}`).pipe(map(() => console.log('OK!')));
   }
 }

@@ -19,16 +19,16 @@ export class StoryBookComponent {
   }
 
   onSubmit() {
-    const queries = JSON.stringify({...this.form.value});
+    const queries = JSON.stringify(Array({ ...this.form.value }));
     const encoded = encodeURI(queries);
-    console.log(encoded);
+    // another way: encoded = JSON.stringify(queries)
 
-    this.service.create(queries).subscribe(res => {
+    this.service.get(queries).subscribe(res => {
       this.result = res;
     });
 
     try {
-      console.log(decodeURI(encoded));
+      console.log('Decode', decodeURI(encoded));
     } catch (e) {
       console.error(e);
     }
